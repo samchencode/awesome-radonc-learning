@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <script id="embeddedSources" type="text/yaml">
-# Higher numbers sort first; use priority: null for an unprioritized resource.
+# Higher numbers sort first; omit priority to leave a resource unprioritized.
 - id: "roecsg-introduction-to-radiation-oncology"
   priority: 78
   title: "ROECSG Introduction to Radiation Oncology"
@@ -2496,11 +2496,11 @@
 
           const priority =
             resource.priority == null || resource.priority === ""
-              ? null
+              ? undefined
               : Number(resource.priority);
-          if (priority !== null && !Number.isFinite(priority)) {
+          if (priority !== undefined && !Number.isFinite(priority)) {
             throw new Error(
-              `Resource ${index + 1} must use a number or null for priority.`,
+              `Resource ${index + 1} must use a number for priority when provided.`,
             );
           }
 
