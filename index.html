@@ -1257,7 +1257,7 @@ goals:
       by: "media_type"
 
   - id: "incoming-learners"
-    title: "Incoming Learners"
+    title: "New Learners"
     description: "Orientation and foundational material for incoming residents and medical students."
     filter:
       all_tags:
@@ -2587,16 +2587,16 @@ goals:
     <header class="site-header">
       <div class="header-inner">
         <div class="brand-row">
-          <a class="brand" href="#library" aria-label="ARRO Learning Resources home">
+          <a class="brand" href="#goals" aria-label="ARRO Learning Resources home">
             <span class="brand-mark" aria-hidden="true"></span>
             ARRO Learning Resources
           </a>
           <div class="header-actions">
             <nav class="page-nav" aria-label="Resource views">
-              <a href="#library" data-page-link="library" aria-current="page"
-                >Library</a
+              <a href="#library" data-page-link="library">Library</a>
+              <a href="#goals" data-page-link="goals" aria-current="page"
+                >Goal lists</a
               >
-              <a href="#goals" data-page-link="goals">Goal lists</a>
             </nav>
             <p class="source-note">Embedded YAML · GitHub Pages</p>
           </div>
@@ -2616,7 +2616,7 @@ goals:
       </div>
     </header>
 
-    <main id="resource-browser" class="browser-shell">
+    <main id="resource-browser" class="browser-shell" hidden>
       <div class="control-deck">
         <div class="search-wrap">
           <svg
@@ -2777,7 +2777,7 @@ goals:
       </div>
     </main>
 
-    <main id="goal-browser" class="browser-shell" hidden>
+    <main id="goal-browser" class="browser-shell">
       <header class="goal-page-intro">
         <h2>Resources by goal</h2>
         <p>
@@ -3718,7 +3718,7 @@ goals:
 
         function showPageFromHash() {
           const currentPage =
-            window.location.hash === "#goals" ? "goals" : "library";
+            window.location.hash === "#library" ? "library" : "goals";
           elements.libraryPage.hidden = currentPage !== "library";
           elements.goalPage.hidden = currentPage !== "goals";
           document.querySelectorAll("[data-page-link]").forEach((link) => {

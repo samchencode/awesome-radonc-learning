@@ -107,7 +107,7 @@ Current raw filter results are:
 | Quick Clinical Lookup | `clinical-knowledge` and any of `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | Media type |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
-| Incoming Learners | `introductory-education` and either the `residents` or `medical-students` audience | 5 | None |
+| New Learners | `introductory-education` and either the `residents` or `medical-students` audience | 5 | None |
 | Professional Development | `professional-development` | 6 | Audience |
 
 Counts overlap because one resource can match multiple goals. Collectively the
