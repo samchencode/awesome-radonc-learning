@@ -4,25 +4,29 @@ ARRO Resources is a curated directory of radiation oncology learning and
 reference material. It is designed primarily for residents, with additional
 resources for medical students, attending physicians, and researchers.
 
-The project is a single, offline-ready HTML application. It supports full-text
-search, pagination, sorting, and include/exclude filters for media type,
-audience, and tags. No server, build process, package installation, or hosting
-is required.
+The project is a static HTML application designed for GitHub Pages. It supports
+full-text search, pagination, sorting, and include/exclude filters for media
+type, audience, and tags. It also provides goal-oriented resource lists with
+configurable matching, exclusions, and grouping. It has no server, build
+process, or package installation.
 
-Opening `index.html` locally is enough to use the directory. The interface works
-offline; following links to external resources still requires network access.
+The interface loads two pinned JavaScript dependencies from jsDelivr, so using
+the site or opening `index.html` locally requires a network connection.
 
 ## Project structure
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The complete application, embedded YAML resource data, styles, interface code, and vendored dependencies |
+| `index.html` | The complete application, embedded YAML resource data, styles, interface code, and pinned CDN dependency references |
+| `.github/workflows/pages.yml` | Publishes only `index.html` to GitHub Pages after a push to `main` |
 | `README.md` | Project structure, schema, and active taxonomy definitions |
 | `export.pdf` | Archival source document used to assemble and order the initial collection |
 | `2026-07-28-ideas.md` | Metadata fields considered for a possible future schema expansion |
-| `2026-07-28-user-facing-goal-categories.md` | Brainstorming for a possible goal-oriented navigation layer; these are not active tags |
+| `2026-07-28-user-facing-goal-categories.md` | Active goal definitions, filter logic, counts, and rationale |
+| `2026-07-28-user-facing-goal-category-revision-plan.md` | Decision and implementation record for the current goal model |
 
-The first element inside the document `<head>` is:
+The application has two editable YAML blocks. The first element inside the
+document `<head>` is:
 
 ```html
 <script id="embeddedSources" type="text/yaml">
@@ -32,9 +36,19 @@ The YAML array inside that element is the resource catalog and the primary
 editable data. It appears before the application code so a nontechnical editor
 can update the list without searching through the rest of the HTML.
 
-The application vendors minified copies of js-yaml 4.1.1 and List.js 2.3.1
-inside `index.html`. These allow the page to parse, search, filter, sort, and
-paginate the YAML without downloading scripts.
+The second block defines goal-oriented navigation:
+
+```html
+<script id="embeddedGoalFilters" type="text/yaml">
+```
+
+Its YAML root is an object containing global goal options and a `goals` array.
+Goal definitions select resources by tag or audience and may group matches for
+display. Goal names are navigation shortcuts, not resource tags.
+
+The application loads minified js-yaml 4.1.1 and List.js 2.3.1 from versioned
+jsDelivr URLs. Subresource Integrity hashes ensure that the browser accepts only
+the exact files reviewed for this project.
 
 The **Load a YAML file** control can preview another YAML array at runtime. It
 does not modify `index.html` or save the uploaded data.
@@ -77,6 +91,82 @@ The YAML root must be an array of resource objects.
 Taxonomy values are stored as lowercase kebab-case. The interface converts
 dashes to spaces and title-cases values for display, so label overrides and
 manually formatted variants are unnecessary.
+
+## Goal lists
+
+The **Goal lists** page applies the filters in `script#embeddedGoalFilters` to
+the same 79-resource catalog used by the main library.
+
+Current raw filter results are:
+
+| Goal | Match logic | Raw matches | Grouping |
+| --- | --- | ---: | --- |
+| Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
+| Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | Media type |
+| Board Preparation | `board-preparation` | 21 | `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
+| Quick Clinical Lookup | `clinical-knowledge` and any of `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | Media type |
+| Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
+| Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
+| Incoming Learners | `introductory-education` and either the `residents` or `medical-students` audience | 5 | None |
+| Professional Development | `professional-development` | 6 | Audience |
+
+Counts overlap because one resource can match multiple goals. Collectively the
+goals capture 78 of 79 resources; ROECSG Podcast Search Engine remains
+available through normal library browsing.
+
+Books are currently hidden by default from all goal lists through
+`options.hide_media_types`. Users can reveal them with the **Show Books**
+control. Raw counts in the table above include books; the initial goal-page
+counts do not. For example, Build Clinical Framework has 40 raw matches and 21
+initially displayed non-book matches.
+
+### Goal-filter schema
+
+```yaml
+options:
+  hide_media_types:
+    - "books"
+
+goals:
+  - id: "example-goal"
+    title: "Example Goal"
+    description: "A short explanation of the user's goal."
+    filter:
+      all_tags:
+        - "clinical-knowledge"
+      any_tags:
+        - "core-reference"
+        - "quick-reference"
+      none_tags:
+        - "resource-list"
+      any_audiences:
+        - "residents"
+    group:
+      by: "tags"
+      tags:
+        - "core-reference"
+        - "quick-reference"
+```
+
+Every populated filter group must match:
+
+- `all_tags`: the resource must carry every listed tag.
+- `any_tags`: the resource must carry at least one listed tag.
+- `none_tags`: the resource must carry none of the listed tags.
+- `any_audiences`: the resource must include at least one listed audience.
+
+Every goal requires a unique `id`, `title`, `description`, and nonempty
+`filter`. Omitting a filter group leaves that condition unrestricted.
+
+`group` is optional and changes presentation rather than matching:
+
+- `by` accepts `media_type`, `audience`, or `tags`.
+- Grouping by `tags` also requires a `tags` array.
+- A resource carrying multiple configured group tags appears under every
+  applicable tag heading.
+
+The supported syntax is `group.by: "tags"` plus `group.tags`; `by_tags` is not
+a recognized field.
 
 ## Taxonomy principles
 
@@ -236,5 +326,38 @@ mentions.
 7. Open `index.html` in a browser and confirm that the library loads, filters
    appear, search works, and no YAML error is shown.
 
-Do not edit the vendored minified dependency scripts when changing resource
-data.
+Do not edit the CDN dependency tags when changing resource data.
+
+## Editing goal lists
+
+1. Open `index.html` in a text editor.
+2. Edit the YAML inside `script#embeddedGoalFilters`.
+3. Preserve the top-level `options` object and `goals` array.
+4. Use only supported filter rules: `all_tags`, `any_tags`, `none_tags`, and
+   `any_audiences`.
+5. When grouping, use `group.by` and add `group.tags` when `by` is `tags`.
+6. Keep goal IDs unique and use only taxonomy values present in the resource
+   catalog.
+7. Open `index.html#goals` and confirm that every goal renders, counts are
+   sensible, grouping headings appear, and the hidden-media controls work.
+
+When resource tags change, recalculate goal counts and update
+`2026-07-28-user-facing-goal-categories.md`. A resource should enter a goal
+because the source is materially focused on that use, not because the topic
+appears incidentally somewhere in a broad collection.
+
+## GitHub Pages deployment
+
+The Pages workflow deploys a minimal artifact containing only `index.html` and a
+generated `.nojekyll` marker. The archival PDF and project notes are therefore
+not served as website files.
+
+To publish the site:
+
+1. Push this repository to GitHub with `main` as its default branch.
+2. In the repository's **Settings → Pages**, set **Source** to **GitHub
+   Actions**.
+3. Push to `main` or manually run **Deploy to GitHub Pages** from the Actions
+   tab.
+
+Every subsequent push to `main` republishes the page.
