@@ -1453,14 +1453,18 @@ goals:
         outline-offset: 2px;
       }
 
+      .page-nav a.library-nudge {
+        animation: library-button-flash 450ms ease-in-out 6 alternate both;
+      }
+
       .page-nav a.library-nudge::after {
         position: absolute;
-        top: calc(100% + 11px);
+        top: calc(100% + 7px);
         left: 50%;
         color: var(--cream);
         content: "↑";
         filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.28));
-        font-size: 1.55rem;
+        font-size: 2.8rem;
         line-height: 1;
         opacity: 0;
         pointer-events: none;
@@ -2202,6 +2206,154 @@ goals:
         margin-top: 7px;
       }
 
+      #goal-browser {
+        padding-right: 56px;
+      }
+
+      .goal-toc {
+        position: fixed;
+        z-index: 35;
+        top: 50%;
+        right: 12px;
+        width: 48px;
+        max-height: calc(100vh - 32px);
+        overflow-x: hidden;
+        overflow-y: auto;
+        border: 1px solid rgba(15, 87, 84, 0.28);
+        border-radius: 12px;
+        background: rgba(255, 253, 248, 0.96);
+        box-shadow: 0 12px 30px rgba(20, 45, 54, 0.16);
+        transform: translateY(-50%);
+        transition:
+          width 180ms ease,
+          box-shadow 180ms ease;
+        scrollbar-width: thin;
+      }
+
+      .goal-toc:hover,
+      .goal-toc:focus-within {
+        width: min(300px, calc(100vw - 28px));
+        box-shadow: 0 18px 42px rgba(20, 45, 54, 0.22);
+      }
+
+      .goal-toc-header {
+        display: grid;
+        min-height: 44px;
+        align-items: center;
+        grid-template-columns: minmax(0, 1fr) 26px;
+        gap: 8px;
+        padding: 8px 10px 7px 13px;
+        border-bottom: 1px solid var(--line);
+        color: var(--teal-dark);
+      }
+
+      .goal-toc-title {
+        visibility: hidden;
+        overflow: hidden;
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        opacity: 0;
+        text-overflow: ellipsis;
+        text-transform: uppercase;
+        transform: translateX(8px);
+        transition:
+          opacity 140ms ease,
+          transform 180ms ease,
+          visibility 180ms ease;
+        white-space: nowrap;
+      }
+
+      .goal-toc-icon {
+        display: grid;
+        width: 24px;
+        height: 24px;
+        font-size: 1.15rem;
+        line-height: 1;
+        place-items: center;
+      }
+
+      .goal-toc-list {
+        display: grid;
+        gap: 4px;
+        margin: 0;
+        padding: 7px 6px 8px;
+        list-style: none;
+      }
+
+      .goal-toc-list a {
+        display: grid;
+        min-height: 34px;
+        align-items: center;
+        grid-template-columns: minmax(0, 1fr) 24px;
+        gap: 8px;
+        padding: 5px 5px 5px 9px;
+        border-radius: 7px;
+        color: var(--ink-soft);
+        text-decoration: none;
+      }
+
+      .goal-toc-list a:hover {
+        background: var(--teal-wash);
+        color: var(--teal-dark);
+      }
+
+      .goal-toc-list a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: -1px;
+      }
+
+      .goal-toc-link-text {
+        visibility: hidden;
+        overflow: hidden;
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.25;
+        opacity: 0;
+        text-overflow: ellipsis;
+        transform: translateX(8px);
+        transition:
+          opacity 140ms ease,
+          transform 180ms ease,
+          visibility 180ms ease;
+        white-space: nowrap;
+      }
+
+      .goal-toc-marker {
+        display: grid;
+        width: 22px;
+        height: 22px;
+        border: 1px solid rgba(15, 87, 84, 0.34);
+        border-radius: 50%;
+        background: var(--surface);
+        color: var(--teal-dark);
+        font-size: 0.62rem;
+        font-weight: 800;
+        place-items: center;
+      }
+
+      .goal-toc:not(:hover):not(:focus-within) .goal-toc-header,
+      .goal-toc:not(:hover):not(:focus-within) .goal-toc-list a {
+        grid-template-columns: 24px;
+        justify-content: center;
+        padding-right: 5px;
+        padding-left: 5px;
+      }
+
+      .goal-toc:not(:hover):not(:focus-within) .goal-toc-title,
+      .goal-toc:not(:hover):not(:focus-within) .goal-toc-link-text {
+        display: none;
+      }
+
+      .goal-toc:hover .goal-toc-title,
+      .goal-toc:focus-within .goal-toc-title,
+      .goal-toc:hover .goal-toc-link-text,
+      .goal-toc:focus-within .goal-toc-link-text {
+        visibility: visible;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
       .goal-options-bar {
         display: flex;
         flex-wrap: wrap;
@@ -2246,6 +2398,7 @@ goals:
       }
 
       .goal-result {
+        scroll-margin-top: 24px;
         padding: 30px 0 36px;
         border-bottom: 1px solid var(--line-strong);
       }
@@ -2477,7 +2630,28 @@ goals:
         }
       }
 
+      @keyframes library-button-flash {
+        from {
+          background: transparent;
+          box-shadow: none;
+          color: rgba(255, 255, 255, 0.72);
+        }
+        to {
+          background: var(--cream);
+          box-shadow: 0 0 0 3px rgba(241, 198, 93, 0.22);
+          color: var(--navy);
+        }
+      }
+
       @media (max-width: 980px) {
+        #goal-browser {
+          padding-right: 0;
+        }
+
+        .goal-toc {
+          display: none;
+        }
+
         .hero {
           grid-template-columns: 1fr;
           gap: 32px;
@@ -2649,6 +2823,7 @@ goals:
         .site-header,
         .control-deck,
         .filters,
+        .goal-toc,
         .sort-wrap,
         .site-footer,
         .pagination-wrap {
@@ -2885,6 +3060,19 @@ goals:
         </div>
       </header>
 
+      <nav
+        id="goalToc"
+        class="goal-toc"
+        aria-label="Goal list table of contents"
+        hidden
+      >
+        <div class="goal-toc-header" aria-hidden="true">
+          <span class="goal-toc-title">Goal filters</span>
+          <span class="goal-toc-icon">☷</span>
+        </div>
+        <ol id="goalTocLinks" class="goal-toc-list"></ol>
+      </nav>
+
       <div id="goalLoadingState" class="loading-state" role="status">
         <span class="loading-dot" aria-hidden="true"></span>
         Loading goal lists…
@@ -2939,6 +3127,8 @@ goals:
           goalOptionsSummary: document.querySelector("#goalOptionsSummary"),
           goalPage: document.querySelector("#goal-browser"),
           goalResults: document.querySelector("#goalResults"),
+          goalToc: document.querySelector("#goalToc"),
+          goalTocLinks: document.querySelector("#goalTocLinks"),
           heroCount: document.querySelector("#heroCount"),
           libraryPage: document.querySelector("#resource-browser"),
           list: document.querySelector(".list"),
@@ -3402,6 +3592,26 @@ goals:
             .join("");
         }
 
+        function renderGoalTableOfContents() {
+          elements.goalTocLinks.innerHTML = goalFilters
+            .map(
+              (goal, index) => `
+                <li>
+                  <a
+                    href="#goal-${escapeHtml(goal.id)}"
+                    aria-label="Jump to ${escapeHtml(goal.title)}"
+                    title="${escapeHtml(goal.title)}"
+                  >
+                    <span class="goal-toc-link-text">${escapeHtml(goal.title)}</span>
+                    <span class="goal-toc-marker" aria-hidden="true">${index + 1}</span>
+                  </a>
+                </li>
+              `,
+            )
+            .join("");
+          elements.goalToc.hidden = !goalFilters.length;
+        }
+
         function renderGoalResults() {
           goalTooltipSequence = 0;
           const sections = goalFilters.map((goal) => {
@@ -3441,6 +3651,7 @@ goals:
           });
 
           renderGoalOptionControls();
+          renderGoalTableOfContents();
           elements.goalResults.innerHTML = sections.join("");
           elements.goalLoadingState.hidden = true;
           elements.goalErrorState.hidden = true;

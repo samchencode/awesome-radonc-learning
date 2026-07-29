@@ -20,6 +20,8 @@ the site or opening `index.html` locally requires a network connection.
 | `index.html` | The complete application, embedded YAML resource data, styles, interface code, and pinned CDN dependency references |
 | `.github/workflows/pages.yml` | Publishes only `index.html` to GitHub Pages after a push to `main` |
 | `README.md` | Project structure, schema, and active taxonomy definitions |
+| `AGENTS.md` | Contributor guardrails, validation workflow, and mandatory pre-commit documentation audit |
+| `ARCHITECTURE.md` | Runtime architecture, data flow, state, contracts, and known limitations |
 | `export.pdf` | Archival source document used to assemble and order the initial collection |
 | `2026-07-28-ideas.md` | Metadata fields considered for a possible future schema expansion |
 | `2026-07-28-user-facing-goal-categories.md` | Active goal definitions, filter logic, counts, and rationale |
