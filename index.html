@@ -81,7 +81,6 @@
   description: "A YouTube lecture series covering high-yield radiation oncology topics."
   tags:
     - "core-reference"
-    - "literature-review"
     - "clinical-knowledge"
   audiences:
     - "residents"
@@ -488,6 +487,7 @@
   description: "A curated collection of radiation biology learning resources."
   tags:
     - "radiation-biology"
+    - "board-preparation"
     - "resource-list"
   audiences:
     - "residents"
@@ -501,6 +501,7 @@
   description: "A video lecture series teaching radiation biology for radiation oncologists."
   tags:
     - "radiation-biology"
+    - "board-preparation"
   audiences:
     - "residents"
   media_type: "lectures"
@@ -528,6 +529,7 @@
   description: "A comprehensive text on cellular and molecular radiobiology, normal-tissue effects, carcinogenesis, and the clinical response to radiation."
   tags:
     - "radiation-biology"
+    - "board-preparation"
     - "comprehensive-reference"
   audiences:
     - "residents"
@@ -541,6 +543,7 @@
   description: "A curated collection of radiation physics learning resources."
   tags:
     - "physics"
+    - "board-preparation"
     - "resource-list"
   audiences:
     - "residents"
@@ -554,6 +557,7 @@
   description: "A lecture series introducing the core physics used in radiation oncology."
   tags:
     - "physics"
+    - "board-preparation"
     - "core-reference"
   audiences:
     - "residents"
@@ -567,6 +571,7 @@
   description: "A comprehensive guide to radiation physics, dosimetry, treatment planning, and the technology used to deliver modern radiotherapy."
   tags:
     - "physics"
+    - "board-preparation"
     - "comprehensive-reference"
   audiences:
     - "residents"
@@ -883,7 +888,6 @@
   title: "Pocket Radiation Oncology (2nd Ed.)"
   description: "A portable clinical reference summarizing disease-site management, treatment algorithms, planning, dose constraints, radiobiology, physics, and emergencies."
   tags:
-    - "board-preparation"
     - "quick-reference"
     - "core-reference"
     - "treatment-planning"
@@ -944,7 +948,6 @@
   title: "Pocket Guide to Radiation Oncology"
   description: "A portable board and clinical reference with disease-site management, target delineation, treatment planning, dose constraints, and follow-up guidance."
   tags:
-    - "board-preparation"
     - "quick-reference"
     - "core-reference"
     - "contouring"
@@ -964,7 +967,6 @@
   tags:
     - "quick-reference"
     - "core-reference"
-    - "literature-review"
     - "treatment-planning"
     - "clinical-knowledge"
   audiences:
@@ -1086,9 +1088,6 @@
     - "professional-development"
     - "board-preparation"
     - "introductory-education"
-    - "practice-based-learning"
-    - "literature-review"
-    - "ai-tools"
     - "anatomy"
     - "contouring"
     - "treatment-planning"
@@ -1164,67 +1163,116 @@
 # Every populated filter group must match.
 # all_tags requires every listed tag.
 # any_tags and any_audiences require at least one listed value.
-- id: "board-preparation"
-  title: "Board Preparation"
-  description: "Written boards, oral boards, certification, physics, and radiation biology."
-  filter:
-    any_tags:
-      - "board-preparation"
-      - "physics"
-      - "radiation-biology"
+# none_tags rejects resources carrying any listed tag.
+# hide_media_types applies to every goal list without affecting the library page.
+# group is optional; omit it to show one complete result list.
+options:
+  hide_media_types:
+    - "books"
 
-- id: "contouring-and-treatment-planning"
-  title: "Contouring & Treatment Planning"
-  description: "Contouring practice, atlases, dose constraints, anatomy, planning guidance, and technical delivery."
-  filter:
-    any_tags:
-      - "contouring"
-      - "treatment-planning"
-      - "constraints"
-      - "anatomy"
+goals:
+  - id: "board-preparation"
+    title: "Board Preparation"
+    description: "Written boards, oral boards, certification, physics, and radiation biology."
+    filter:
+      any_tags:
+        - "board-preparation"
+    group:
+      by: "tags"
+      tags:
+        - "practice-based-learning"
+        - "quick-reference"
+        - "core-reference"
+        - "physics"
+        - "radiation-biology"
 
-- id: "quick-clinical-lookup"
-  title: "Quick Clinical Lookup"
-  description: "Fast references for clinic, new patients, treatment recommendations, and tumor boards."
-  filter:
-    all_tags:
-      - "clinical-knowledge"
-    any_tags:
-      - "quick-reference"
-      - "guidelines"
-      - "clinical-decision-support-tools"
+  - id: "contouring-and-treatment-planning"
+    title: "Contouring & Treatment Planning"
+    description: "Contouring practice, atlases, dose constraints, anatomy, planning guidance, and technical delivery."
+    filter:
+      any_tags:
+        - "contouring"
+        - "treatment-planning"
+        - "constraints"
+        - "anatomy"
+    group:
+      by: "media_type"
 
-- id: "active-learning"
-  title: "Active Learning / Retrieval Practice"
-  description: "Questions, mock cases, exercises, and clinical scenarios."
-  filter:
-    any_tags:
-      - "case-vignettes"
-      - "practice-based-learning"
+  - id: "quick-clinical-lookup"
+    title: "Quick Clinical Lookup"
+    description: "Fast references for clinic, new patients, treatment recommendations, and tumor boards."
+    filter:
+      all_tags:
+        - "clinical-knowledge"
+      any_tags:
+        - "quick-reference"
+        - "guidelines"
+        - "clinical-decision-support-tools"
+    group:
+      by: "media_type"
 
-- id: "staying-current"
-  title: "Staying Current"
-  description: "Journal discussions, evidence summaries, journal clubs, and literature updates."
-  filter:
-    any_tags:
-      - "literature-review"
+  - id: "active-learning"
+    title: "Active Learning / Retrieval Practice"
+    description: "Questions, mock cases, exercises, and clinical scenarios."
+    filter:
+      any_tags:
+        - "case-vignettes"
+        - "practice-based-learning"
+    group:
+      by: "media_type"
 
-- id: "incoming-learners"
-  title: "Incoming Learners"
-  description: "Orientation and foundational material for incoming residents and medical students."
-  filter:
-    all_tags:
-      - "introductory-education"
-    any_audiences:
-      - "residents"
-      - "medical-students"
+  - id: "staying-current"
+    title: "Staying Current"
+    description: "Journal discussions, evidence summaries, journal clubs, and literature updates."
+    filter:
+      any_tags:
+        - "literature-review"
+        - "newsletters"
+      none_tags:
+        - "core-reference"
+        - "resource-list"
+    group:
+      by: "media_type"
 
-- id: "professional-development"
-  title: "Professional Development"
-  description: "Career development, mentorship, leadership, academic medicine, communication, and professional skills."
-  filter:
-    any_tags:
-      - "professional-development"
+  - id: "incoming-learners"
+    title: "Incoming Learners"
+    description: "Orientation and foundational material for incoming residents and medical students."
+    filter:
+      all_tags:
+        - "introductory-education"
+      any_audiences:
+        - "residents"
+        - "medical-students"
+
+  - id: "build-clinical-framework"
+    title: "Build Clinical Framework"
+    description: "Introductory, core, comprehensive, high-yield, and quick-reference resources for learning clinical radiation oncology."
+    filter:
+      all_tags:
+        - "clinical-knowledge"
+      any_tags:
+        - "introductory-education"
+        - "core-reference"
+        - "comprehensive-reference"
+        - "high-yield-overview"
+        - "quick-reference"
+    group:
+      by: "tags"
+      tags:
+        - "introductory-education"
+        - "core-reference"
+        - "comprehensive-reference"
+        - "high-yield-overview"
+        - "quick-reference"
+
+  - id: "professional-development"
+    title: "Professional Development"
+    description: "Career development, mentorship, leadership, academic medicine, communication, and professional skills."
+    filter:
+      any_tags:
+        - "professional-development"
+    group:
+      by: "audience"
 
 </script>
     <meta charset="utf-8" />
@@ -2145,16 +2193,61 @@
         color: var(--ink-soft);
       }
 
+      .goal-page-intro p + p {
+        margin-top: 7px;
+      }
+
+      .goal-options-bar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+        align-items: center;
+        margin-top: 9px;
+      }
+
+      .goal-options-summary {
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .goal-media-toggles {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+      }
+
+      .goal-media-toggle {
+        display: inline-flex;
+        min-height: 30px;
+        align-items: center;
+        gap: 7px;
+        padding: 4px 10px;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
+        cursor: pointer;
+        font-size: 0.76rem;
+        font-weight: 700;
+      }
+
+      .goal-media-toggle input {
+        margin: 0;
+        accent-color: var(--teal-dark);
+      }
+
       .goal-results {
         border-top: 1px solid var(--line-strong);
       }
 
       .goal-result {
-        display: grid;
-        grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1fr);
-        gap: clamp(28px, 5vw, 76px);
         padding: 30px 0 36px;
         border-bottom: 1px solid var(--line-strong);
+      }
+
+      .goal-result > header {
+        max-width: 760px;
+        margin-bottom: 24px;
       }
 
       .goal-result h3 {
@@ -2188,6 +2281,42 @@
       .goal-resource-list {
         margin: 0;
         padding-left: 1.3rem;
+      }
+
+      .goal-masonry {
+        columns: 260px;
+        column-gap: 18px;
+      }
+
+      .goal-group {
+        display: inline-block;
+        width: 100%;
+        margin: 0 0 18px;
+        padding: 15px 16px 16px;
+        break-inside: avoid;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: rgba(255, 253, 248, 0.7);
+      }
+
+      .goal-group-heading {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 7px;
+      }
+
+      .goal-group-heading h4 {
+        margin: 0;
+        font-size: 0.88rem;
+        letter-spacing: 0.04em;
+      }
+
+      .goal-group-count {
+        color: #748186;
+        font-size: 0.7rem;
+        white-space: nowrap;
       }
 
       .goal-resource-list li {
@@ -2329,9 +2458,15 @@
         }
 
         .goal-result {
-          grid-template-columns: 1fr;
-          gap: 18px;
           padding: 26px 0 30px;
+        }
+
+        .goal-result > header {
+          margin-bottom: 20px;
+        }
+
+        .goal-masonry {
+          columns: 1;
         }
 
         .filters {
@@ -2648,6 +2783,14 @@
           Each list applies one of the goal filters defined in the embedded
           goal-filter YAML.
         </p>
+        <div id="goalOptionsBar" class="goal-options-bar" hidden>
+          <span id="goalOptionsSummary" class="goal-options-summary"></span>
+          <span
+            id="goalMediaToggles"
+            class="goal-media-toggles"
+            aria-label="Goal-list media options"
+          ></span>
+        </div>
       </header>
 
       <div id="goalLoadingState" class="loading-state" role="status">
@@ -2699,6 +2842,9 @@
           goalErrorDetail: document.querySelector("#goalErrorDetail"),
           goalErrorState: document.querySelector("#goalErrorState"),
           goalLoadingState: document.querySelector("#goalLoadingState"),
+          goalMediaToggles: document.querySelector("#goalMediaToggles"),
+          goalOptionsBar: document.querySelector("#goalOptionsBar"),
+          goalOptionsSummary: document.querySelector("#goalOptionsSummary"),
           goalPage: document.querySelector("#goal-browser"),
           goalResults: document.querySelector("#goalResults"),
           heroCount: document.querySelector("#heroCount"),
@@ -2721,6 +2867,8 @@
         let resourceList = null;
         let resources = [];
         let goalFilters = [];
+        let goalOptions = { hide_media_types: [] };
+        const revealedGoalMediaTypes = new Set();
         let handlersAttached = false;
 
         function labelFor(value) {
@@ -2814,15 +2962,33 @@
           };
         }
 
-        function normalizeGoalFilterValues(filter, key, index) {
-          const values = filter[key];
+        function normalizeStringArray(values, description) {
           if (values == null) return [];
           if (!Array.isArray(values)) {
-            throw new Error(
-              `Goal filter ${index + 1} must use an array for ${key}.`,
-            );
+            throw new Error(`${description} must be an array.`);
           }
           return [...new Set(values.map(String))];
+        }
+
+        function normalizeGoalOptions(options) {
+          if (options == null) return { hide_media_types: [] };
+          if (typeof options !== "object" || Array.isArray(options)) {
+            throw new Error("Goal-filter options must be an object.");
+          }
+          const unknown = Object.keys(options).filter(
+            (key) => key !== "hide_media_types",
+          );
+          if (unknown.length) {
+            throw new Error(
+              `Unsupported global goal option: ${unknown.join(", ")}.`,
+            );
+          }
+          return {
+            hide_media_types: normalizeStringArray(
+              options.hide_media_types,
+              "options.hide_media_types",
+            ),
+          };
         }
 
         function normalizeGoalFilter(goal, index) {
@@ -2840,22 +3006,37 @@
           if (!goal.filter || typeof goal.filter !== "object") {
             throw new Error(`Goal filter ${index + 1} must define filter rules.`);
           }
+          const supportedFilterRules = [
+            "all_tags",
+            "any_tags",
+            "none_tags",
+            "any_audiences",
+          ];
+          const unknownFilterRules = Object.keys(goal.filter).filter(
+            (key) => !supportedFilterRules.includes(key),
+          );
+          if (unknownFilterRules.length) {
+            throw new Error(
+              `Goal filter ${index + 1} has unsupported rules: ${unknownFilterRules.join(", ")}.`,
+            );
+          }
 
           const filter = {
-            all_tags: normalizeGoalFilterValues(
-              goal.filter,
-              "all_tags",
-              index,
+            all_tags: normalizeStringArray(
+              goal.filter.all_tags,
+              `Goal filter ${index + 1} all_tags`,
             ),
-            any_tags: normalizeGoalFilterValues(
-              goal.filter,
-              "any_tags",
-              index,
+            any_tags: normalizeStringArray(
+              goal.filter.any_tags,
+              `Goal filter ${index + 1} any_tags`,
             ),
-            any_audiences: normalizeGoalFilterValues(
-              goal.filter,
-              "any_audiences",
-              index,
+            none_tags: normalizeStringArray(
+              goal.filter.none_tags,
+              `Goal filter ${index + 1} none_tags`,
+            ),
+            any_audiences: normalizeStringArray(
+              goal.filter.any_audiences,
+              `Goal filter ${index + 1} any_audiences`,
             ),
           };
           if (!Object.values(filter).some((values) => values.length)) {
@@ -2863,12 +3044,48 @@
               `Goal filter ${index + 1} must contain at least one rule.`,
             );
           }
+          let group = null;
+          if (goal.group != null) {
+            if (typeof goal.group !== "object" || Array.isArray(goal.group)) {
+              throw new Error(
+                `Goal filter ${index + 1} group must be an object.`,
+              );
+            }
+            const groupBy = String(goal.group.by || "");
+            if (!["audience", "media_type", "tags"].includes(groupBy)) {
+              throw new Error(
+                `Goal filter ${index + 1} group.by must be audience, media_type, or tags.`,
+              );
+            }
+            const unknownGroupRules = Object.keys(goal.group).filter(
+              (key) => !["by", "tags"].includes(key),
+            );
+            if (unknownGroupRules.length) {
+              throw new Error(
+                `Goal filter ${index + 1} has unsupported group fields: ${unknownGroupRules.join(", ")}.`,
+              );
+            }
+            const groupTags = normalizeStringArray(
+              goal.group.tags,
+              `Goal filter ${index + 1} group.tags`,
+            );
+            if (groupBy === "tags" && !groupTags.length) {
+              throw new Error(
+                `Goal filter ${index + 1} must list tags when grouping by tags.`,
+              );
+            }
+            group = {
+              by: groupBy,
+              tags: groupTags,
+            };
+          }
 
           return {
             id: String(goal.id),
             title: String(goal.title),
             description: String(goal.description),
             filter,
+            group,
           };
         }
 
@@ -2877,6 +3094,7 @@
             filter.all_tags.every((tag) => resource.tags.includes(tag)) &&
             (!filter.any_tags.length ||
               filter.any_tags.some((tag) => resource.tags.includes(tag))) &&
+            !filter.none_tags.some((tag) => resource.tags.includes(tag)) &&
             (!filter.any_audiences.length ||
               filter.any_audiences.some((audience) =>
                 resource.audiences.includes(audience),
@@ -2902,6 +3120,7 @@
           const rules = [
             ["All topics", filter.all_tags],
             ["Any topic", filter.any_tags],
+            ["Exclude topics", filter.none_tags],
             ["Any audience", filter.any_audiences],
           ];
           return rules
@@ -2913,34 +3132,173 @@
             .join(" · ");
         }
 
+        function groupGoalResources(matches, group) {
+          if (group.by === "tags") {
+            const groups = group.tags.map((tag) => ({
+              id: tag,
+              label: labelFor(tag),
+              resources: matches.filter((resource) =>
+                resource.tags.includes(tag),
+              ),
+            }));
+            const otherResources = matches.filter(
+              (resource) =>
+                !group.tags.some((tag) => resource.tags.includes(tag)),
+            );
+            if (otherResources.length) {
+              groups.push({
+                id: "other",
+                label: "Other",
+                resources: otherResources,
+              });
+            }
+            return groups.filter(({ resources: items }) => items.length);
+          }
+
+          const values = [
+            ...new Set(
+              matches.flatMap((resource) =>
+                group.by === "audience"
+                  ? resource.audiences
+                  : [resource.media_type],
+              ),
+            ),
+          ]
+            .filter(Boolean)
+            .sort((left, right) =>
+              labelFor(left).localeCompare(labelFor(right)),
+            );
+          const groups = values.map((value) => ({
+            id: value,
+            label: labelFor(value),
+            resources: matches.filter((resource) =>
+              group.by === "audience"
+                ? resource.audiences.includes(value)
+                : resource.media_type === value,
+            ),
+          }));
+          const otherResources = matches.filter((resource) =>
+            group.by === "audience"
+              ? !resource.audiences.length
+              : !resource.media_type,
+          );
+          if (otherResources.length) {
+            groups.push({
+              id: "other",
+              label: "Other",
+              resources: otherResources,
+            });
+          }
+          return groups;
+        }
+
+        function renderGoalResourceItems(items, groupBy) {
+          return items
+            .map((resource) => {
+              const url = safeUrl(resource.url);
+              const title = escapeHtml(resource.title);
+              const linkedTitle = url
+                ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+                : `<span>${title}</span>`;
+              const media =
+                groupBy === "media_type"
+                  ? ""
+                  : `<span class="goal-resource-meta">${escapeHtml(labelFor(resource.media_type))}</span>`;
+              return `<li>${linkedTitle}${media}</li>`;
+            })
+            .join("");
+        }
+
+        function renderGoalGroups(groups, groupBy) {
+          if (!groups.length) {
+            return '<p class="goal-description">No resources match this filter.</p>';
+          }
+          return groups
+            .map(({ id, label, resources: items }) => {
+              const countLabel = `${items.length} ${
+                items.length === 1 ? "resource" : "resources"
+              }`;
+              return `
+                <section class="goal-group" data-goal-group="${escapeHtml(id)}">
+                  <header class="goal-group-heading">
+                    <h4>${escapeHtml(label)}</h4>
+                    <span class="goal-group-count">${escapeHtml(countLabel)}</span>
+                  </header>
+                  <ol class="goal-resource-list">
+                    ${renderGoalResourceItems(items, groupBy)}
+                  </ol>
+                </section>
+              `;
+            })
+            .join("");
+        }
+
+        function renderUngroupedGoalResults(items) {
+          const contents = items.length
+            ? `<ol class="goal-resource-list">${renderGoalResourceItems(items, null)}</ol>`
+            : '<p class="goal-description">No resources match this filter.</p>';
+          return `
+            <section
+              class="goal-group goal-group-ungrouped"
+              data-goal-group="all"
+            >
+              ${contents}
+            </section>
+          `;
+        }
+
+        function isGoalMediaTypeHidden(mediaType) {
+          return (
+            goalOptions.hide_media_types.includes(mediaType) &&
+            !revealedGoalMediaTypes.has(mediaType)
+          );
+        }
+
+        function renderGoalOptionControls() {
+          const hiddenByDefault = goalOptions.hide_media_types;
+          elements.goalOptionsBar.hidden = !hiddenByDefault.length;
+          elements.goalOptionsSummary.textContent = hiddenByDefault.length
+            ? `Hidden by default: ${hiddenByDefault.map(labelFor).join(", ")}.`
+            : "";
+          elements.goalMediaToggles.innerHTML = hiddenByDefault
+            .map((mediaType) => {
+              const label = labelFor(mediaType);
+              const checked = revealedGoalMediaTypes.has(mediaType)
+                ? " checked"
+                : "";
+              return `
+                <label class="goal-media-toggle">
+                  <input
+                    type="checkbox"
+                    data-goal-media-toggle="${escapeHtml(mediaType)}"
+                    ${checked}
+                  />
+                  Show ${escapeHtml(label)}
+                </label>
+              `;
+            })
+            .join("");
+        }
+
         function renderGoalResults() {
           const sections = goalFilters.map((goal) => {
             const matches = resources
               .filter((resource) =>
                 resourceMatchesGoal(resource, goal.filter),
               )
+              .filter(
+                (resource) => !isGoalMediaTypeHidden(resource.media_type),
+              )
               .sort(compareResourcesByPriority);
-            const resourceItems = matches
-              .map((resource) => {
-                const url = safeUrl(resource.url);
-                const title = escapeHtml(resource.title);
-                const linkedTitle = url
-                  ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
-                  : `<span>${title}</span>`;
-                return `
-                  <li>
-                    ${linkedTitle}
-                    <span class="goal-resource-meta">${escapeHtml(labelFor(resource.media_type))}</span>
-                  </li>
-                `;
-              })
-              .join("");
-            const resultBody = resourceItems
-              ? `<ol class="goal-resource-list">${resourceItems}</ol>`
-              : '<p class="goal-description">No resources match this filter.</p>';
             const countLabel = `${matches.length} ${
               matches.length === 1 ? "resource" : "resources"
             }`;
+            const resultBody = goal.group
+              ? renderGoalGroups(
+                  groupGoalResources(matches, goal.group),
+                  goal.group.by,
+                )
+              : renderUngroupedGoalResults(matches);
 
             return `
               <section
@@ -2954,11 +3312,12 @@
                   <p class="goal-filter-summary">${escapeHtml(describeGoalFilter(goal.filter))}</p>
                   <p class="goal-count">${escapeHtml(countLabel)}</p>
                 </header>
-                <div>${resultBody}</div>
+                <div class="goal-masonry">${resultBody}</div>
               </section>
             `;
           });
 
+          renderGoalOptionControls();
           elements.goalResults.innerHTML = sections.join("");
           elements.goalLoadingState.hidden = true;
           elements.goalErrorState.hidden = true;
@@ -3262,6 +3621,18 @@
           if (handlersAttached) return;
           handlersAttached = true;
 
+          elements.goalMediaToggles.addEventListener("change", (event) => {
+            const input = event.target.closest("[data-goal-media-toggle]");
+            if (!input) return;
+            const mediaType = input.dataset.goalMediaToggle;
+            if (input.checked) {
+              revealedGoalMediaTypes.add(mediaType);
+            } else {
+              revealedGoalMediaTypes.delete(mediaType);
+            }
+            renderGoalResults();
+          });
+
           elements.filters.addEventListener("click", (event) => {
             const button = event.target.closest(".filter-toggle");
             if (!button) return;
@@ -3440,10 +3811,23 @@
           }
 
           const data = window.jsyaml.load(text, { filename });
-          if (!Array.isArray(data)) {
-            throw new Error("The goal-filter YAML root must be an array.");
+          if (!data || typeof data !== "object" || Array.isArray(data)) {
+            throw new Error("The goal-filter YAML root must be an object.");
           }
-          goalFilters = data.map(normalizeGoalFilter);
+          const unknownRootFields = Object.keys(data).filter(
+            (key) => !["options", "goals"].includes(key),
+          );
+          if (unknownRootFields.length) {
+            throw new Error(
+              `Unsupported goal-filter root fields: ${unknownRootFields.join(", ")}.`,
+            );
+          }
+          if (!Array.isArray(data.goals)) {
+            throw new Error("The goal-filter YAML must contain a goals array.");
+          }
+          goalOptions = normalizeGoalOptions(data.options);
+          revealedGoalMediaTypes.clear();
+          goalFilters = data.goals.map(normalizeGoalFilter);
           const ids = new Set(goalFilters.map((goal) => goal.id));
           if (ids.size !== goalFilters.length) {
             throw new Error("Every goal filter must have a unique id.");
