@@ -101,18 +101,22 @@ Current raw filter results are:
 
 | Goal | Match logic | Raw matches | Grouping |
 | --- | --- | ---: | --- |
-| Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
+| Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
 | Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | Media type |
 | Board Preparation | `board-preparation` | 21 | `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
 | Quick Clinical Lookup | `clinical-knowledge` and any of `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | Media type |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
-| New Learners | `introductory-education` and either the `residents` or `medical-students` audience | 5 | None |
 | Professional Development | `professional-development` | 6 | Audience |
 
 Counts overlap because one resource can match multiple goals. Collectively the
 goals capture 78 of 79 resources; ROECSG Podcast Search Engine remains
 available through normal library browsing.
+
+Hovering a resource title in a goal list—or focusing it with the keyboard—shows
+its description, tags, audiences, and media type. This tooltip is intentionally
+limited to the Goal lists page; the Library table continues to display metadata
+directly in its columns.
 
 Books are currently hidden by default from all goal lists through
 `options.hide_media_types`. Users can reveal them with the **Show Books**

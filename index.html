@@ -2312,6 +2312,7 @@ goals:
       }
 
       .goal-resource-list li {
+        position: relative;
         padding: 3px 0;
       }
 
@@ -2326,10 +2327,87 @@ goals:
         text-decoration-color: currentColor;
       }
 
+      .goal-resource-trigger {
+        cursor: help;
+      }
+
       .goal-resource-meta {
         margin-left: 7px;
         color: #748186;
         font-size: 0.72rem;
+      }
+
+      .goal-resource-tooltip {
+        position: absolute;
+        z-index: 20;
+        top: calc(100% + 7px);
+        left: 0;
+        visibility: hidden;
+        width: min(340px, 100%);
+        padding: 12px 13px;
+        border: 1px solid rgba(15, 73, 72, 0.24);
+        border-radius: 8px;
+        background: #fffdf8;
+        box-shadow: 0 12px 28px rgba(17, 48, 52, 0.18);
+        color: var(--ink);
+        font-size: 0.76rem;
+        line-height: 1.42;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-3px);
+        transition:
+          opacity 120ms ease,
+          transform 120ms ease,
+          visibility 120ms ease;
+      }
+
+      .goal-resource-tooltip::before {
+        position: absolute;
+        top: -5px;
+        left: 18px;
+        width: 8px;
+        height: 8px;
+        border-top: 1px solid rgba(15, 73, 72, 0.24);
+        border-left: 1px solid rgba(15, 73, 72, 0.24);
+        background: #fffdf8;
+        content: "";
+        transform: rotate(45deg);
+      }
+
+      .goal-resource-list li:hover .goal-resource-tooltip,
+      .goal-resource-list li:focus-within .goal-resource-tooltip {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .goal-resource-tooltip p {
+        margin: 0 0 9px;
+      }
+
+      .goal-resource-tooltip dl {
+        display: grid;
+        gap: 5px;
+        margin: 0;
+      }
+
+      .goal-resource-tooltip dl > div {
+        display: grid;
+        grid-template-columns: 72px minmax(0, 1fr);
+        gap: 8px;
+      }
+
+      .goal-resource-tooltip dt {
+        color: var(--teal-dark);
+        font-size: 0.67rem;
+        font-weight: 800;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .goal-resource-tooltip dd {
+        margin: 0;
+        color: var(--ink-soft);
       }
 
       .site-footer {
@@ -2862,6 +2940,7 @@ goals:
         let goalOptions = { hide_media_types: [] };
         const revealedGoalMediaTypes = new Set();
         let handlersAttached = false;
+        let goalTooltipSequence = 0;
 
         function labelFor(value) {
           return String(value)
@@ -3189,14 +3268,43 @@ goals:
             .map((resource) => {
               const url = safeUrl(resource.url);
               const title = escapeHtml(resource.title);
+              const tooltipId = `goal-resource-tooltip-${goalTooltipSequence++}`;
+              const tooltipAttributes = `class="goal-resource-trigger" aria-describedby="${tooltipId}"`;
               const linkedTitle = url
-                ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
-                : `<span>${title}</span>`;
+                ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" ${tooltipAttributes}>${title}</a>`
+                : `<span ${tooltipAttributes} tabindex="0">${title}</span>`;
               const media =
                 groupBy === "media_type"
                   ? ""
                   : `<span class="goal-resource-meta">${escapeHtml(labelFor(resource.media_type))}</span>`;
-              return `<li>${linkedTitle}${media}</li>`;
+              const tags =
+                resource.tags.map(labelFor).join(", ") || "None specified";
+              const audiences =
+                resource.audiences.map(labelFor).join(", ") || "None specified";
+              const tooltip = `
+                <aside
+                  id="${tooltipId}"
+                  class="goal-resource-tooltip"
+                  role="tooltip"
+                >
+                  <p>${escapeHtml(resource.description)}</p>
+                  <dl>
+                    <div>
+                      <dt>Tags</dt>
+                      <dd>${escapeHtml(tags)}</dd>
+                    </div>
+                    <div>
+                      <dt>Audience</dt>
+                      <dd>${escapeHtml(audiences)}</dd>
+                    </div>
+                    <div>
+                      <dt>Media type</dt>
+                      <dd>${escapeHtml(labelFor(resource.media_type))}</dd>
+                    </div>
+                  </dl>
+                </aside>
+              `;
+              return `<li>${linkedTitle}${media}${tooltip}</li>`;
             })
             .join("");
         }
@@ -3273,6 +3381,7 @@ goals:
         }
 
         function renderGoalResults() {
+          goalTooltipSequence = 0;
           const sections = goalFilters.map((goal) => {
             const matches = resources
               .filter((resource) =>
