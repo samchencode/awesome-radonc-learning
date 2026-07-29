@@ -65,7 +65,20 @@ Suggested filter:
 - `contouring` OR `treatment-planning` OR `constraints`
 - `anatomy` (tx planning is the main reason we care about anatomy)
 
+Group matching resources by:
+
+- `contouring`
+- `anatomy`
+- `constraints`
+- `proton-therapy`
+- Other, for resources without one of those four grouping tags
+
 Current result: **30 of 79 resources**.
+
+With books hidden by default, the goal page initially displays
+`contouring` (8), `anatomy` (5), `constraints` (2), `proton-therapy` (3), and
+Other (1). Group counts overlap because resources carrying multiple grouping
+tags appear under each applicable heading.
 
 Tags represented: `treatment-planning` (26), `clinical-knowledge` (16),
 `contouring` (13), `comprehensive-reference` (7), `quick-reference` (6),
@@ -266,6 +279,8 @@ this idea.
 - Include `newsletters` in Staying Current and exclude `core-reference` and
   `resource-list`.
 - Keep ARRO Webinars and ACRO Resident Webinars in Staying Current for now.
+- Group Contouring & Treatment Planning by `contouring`, `anatomy`,
+  `constraints`, and `proton-therapy`, with remaining matches under Other.
 - Add Build Clinical Framework using `clinical-knowledge` plus at least one
   introductory, core, comprehensive, high-yield, or quick-reference tag.
 - Group Build Clinical Framework by those five learning-resource tags.

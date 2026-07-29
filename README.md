@@ -102,7 +102,7 @@ Current raw filter results are:
 | Goal | Match logic | Raw matches | Grouping |
 | --- | --- | ---: | --- |
 | Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
-| Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | Media type |
+| Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | `contouring`, `anatomy`, `constraints`, and `proton-therapy` tags; unmatched resources appear under Other |
 | Board Preparation | `board-preparation` | 21 | `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
 | Quick Clinical Lookup | `clinical-knowledge` and any of `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | Media type |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
@@ -168,6 +168,7 @@ Every goal requires a unique `id`, `title`, `description`, and nonempty
 - Grouping by `tags` also requires a `tags` array.
 - A resource carrying multiple configured group tags appears under every
   applicable tag heading.
+- A matching resource without a configured group tag appears under Other.
 
 The supported syntax is `group.by: "tags"` plus `group.tags`; `by_tags` is not
 a recognized field.

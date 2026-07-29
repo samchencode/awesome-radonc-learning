@@ -1204,7 +1204,12 @@ goals:
         - "constraints"
         - "anatomy"
     group:
-      by: "media_type"
+      by: "tags"
+      tags:
+        - "contouring"
+        - "anatomy"
+        - "constraints"
+        - "proton-therapy"
 
   - id: "board-preparation"
     title: "Board Preparation"
@@ -1425,6 +1430,7 @@ goals:
       }
 
       .page-nav a {
+        position: relative;
         padding: 6px 10px;
         border-radius: 6px;
         color: rgba(255, 255, 255, 0.72);
@@ -1445,6 +1451,21 @@ goals:
       .page-nav a:focus-visible {
         outline: 3px solid var(--focus);
         outline-offset: 2px;
+      }
+
+      .page-nav a.library-nudge::after {
+        position: absolute;
+        top: calc(100% + 11px);
+        left: 50%;
+        color: var(--cream);
+        content: "↑";
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.28));
+        font-size: 1.55rem;
+        line-height: 1;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate(-50%, 6px);
+        animation: library-nudge-flash 450ms ease-in-out 6 alternate both;
       }
 
       .hero {
@@ -2445,6 +2466,17 @@ goals:
         }
       }
 
+      @keyframes library-nudge-flash {
+        from {
+          opacity: 0;
+          transform: translate(-50%, 6px);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, 0);
+        }
+      }
+
       @media (max-width: 980px) {
         .hero {
           grid-template-columns: 1fr;
@@ -2668,8 +2700,8 @@ goals:
           </div>
           <p class="hero-copy">
             <strong id="heroCount">Loading resources…</strong>
-            Search clinical references, board review, lectures, podcasts,
-            planning tools, and more.
+            Use the Library button above to search clinical references, board
+            review, lectures, podcasts, planning tools, and more.
           </p>
         </div>
       </div>
@@ -3818,10 +3850,35 @@ goals:
               link.removeAttribute("aria-current");
             }
           });
+          if (currentPage === "library") {
+            document
+              .querySelector('[data-page-link="library"]')
+              ?.classList.remove("library-nudge");
+          }
           document.title =
             currentPage === "goals"
               ? "Goal Lists · Radiation Oncology Learning Resources"
               : "Radiation Oncology Learning Resources";
+        }
+
+        function showInitialLibraryNudge() {
+          if (window.location.hash === "#library") return;
+          const libraryLink = document.querySelector(
+            '[data-page-link="library"]',
+          );
+          if (!libraryLink) return;
+
+          const dismiss = () => libraryLink.classList.remove("library-nudge");
+          libraryLink.classList.add("library-nudge");
+          const timeoutId = window.setTimeout(dismiss, 2800);
+          libraryLink.addEventListener(
+            "click",
+            () => {
+              window.clearTimeout(timeoutId);
+              dismiss();
+            },
+            { once: true },
+          );
         }
 
         function showError(error) {
@@ -3987,6 +4044,7 @@ goals:
 
         window.addEventListener("hashchange", showPageFromHash);
         showPageFromHash();
+        showInitialLibraryNudge();
         loadDefaultSource();
       })();
     </script>
