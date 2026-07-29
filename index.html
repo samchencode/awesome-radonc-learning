@@ -1273,7 +1273,7 @@ goals:
       name="description"
       content="Search and filter a curated collection of radiation oncology learning resources."
     />
-    <title>ARRO Learning Resources</title>
+    <title>Radiation Oncology Learning Resources</title>
     <style>
       :root {
         color-scheme: light;
@@ -1406,14 +1406,6 @@ goals:
         border: 2px solid var(--cream);
         border-radius: 50%;
         content: "";
-      }
-
-      .source-note {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.62);
-        font-size: 0.77rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
       }
 
       .header-actions {
@@ -2501,11 +2493,6 @@ goals:
           align-items: flex-start;
         }
 
-        .source-note {
-          max-width: 150px;
-          text-align: left;
-        }
-
         h1 {
           font-size: clamp(2.8rem, 15vw, 4.6rem);
         }
@@ -2656,9 +2643,13 @@ goals:
     <header class="site-header">
       <div class="header-inner">
         <div class="brand-row">
-          <a class="brand" href="#goals" aria-label="ARRO Learning Resources home">
+          <a
+            class="brand"
+            href="#goals"
+            aria-label="Radiation Oncology Learning Resources home"
+          >
             <span class="brand-mark" aria-hidden="true"></span>
-            ARRO Learning Resources
+            Radiation Oncology Learning Resources
           </a>
           <div class="header-actions">
             <nav class="page-nav" aria-label="Resource views">
@@ -2667,7 +2658,6 @@ goals:
                 >Goal lists</a
               >
             </nav>
-            <p class="source-note">Embedded YAML · GitHub Pages</p>
           </div>
         </div>
 
@@ -3830,8 +3820,8 @@ goals:
           });
           document.title =
             currentPage === "goals"
-              ? "Goal Lists · ARRO Learning Resources"
-              : "ARRO Learning Resources";
+              ? "Goal Lists · Radiation Oncology Learning Resources"
+              : "Radiation Oncology Learning Resources";
         }
 
         function showError(error) {
