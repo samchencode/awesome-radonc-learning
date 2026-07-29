@@ -34,16 +34,16 @@ Physics and radiation-biology resources intended for board study carry the
 `board-preparation` tag explicitly. Broad textbooks no longer enter this goal
 merely because they cover physics or radiation biology.
 
-Current result: **24 of 79 resources**, including 8 books.
+Current result: **23 of 79 resources**, including 8 books.
 
-The goal page hides books and displays **16 unique resources**:
+The goal page hides books and displays **15 unique resources**:
 `case-vignettes` (4), `practice-based-learning` (1),
 `quick-reference` (1), `core-reference` (1), `physics` (4),
-`radiation-biology` (4), and `Other` (5). Group counts overlap
+`radiation-biology` (4), and `Other` (4). Group counts overlap
 because a resource appears in every group whose tag it carries.
 
-Tags represented: `board-preparation` (21), `clinical-knowledge` (16),
-`high-yield-overview` (9), `case-vignettes` (6), `physics` (5),
+Tags represented: `board-preparation` (20), `clinical-knowledge` (15),
+`high-yield-overview` (8), `case-vignettes` (6), `physics` (5),
 `practice-based-learning` (5), `radiation-biology` (5),
 `resource-list` (5), `treatment-planning` (5),
 `comprehensive-reference` (3), `contouring` (3), `anatomy` (2),
@@ -257,6 +257,9 @@ Tags represented: `professional-development` (6), `clinical-knowledge` (4),
 `treatment-planning` (3), `anatomy` (2), `board-preparation` (2),
 `contouring` (2), `literature-review` (2), `resource-list` (2), `physics`
 (1), and `radiation-biology` (1).
+
+The goal page groups these resources by audience: `residents` (6),
+`researchers` (3), `attendings` (2), and `medical-students` (2).
 
 `research-methods` should not be introduced because research methodology is not
 a significant portion of the current collection.

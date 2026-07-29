@@ -105,7 +105,7 @@ Current raw filter results are:
 | --- | --- | ---: | --- |
 | Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
 | Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | `contouring`, `anatomy`, `constraints`, and `proton-therapy` tags; unmatched resources appear under Other |
-| Board Preparation | Any of `board-preparation` or `case-vignettes` | 24 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
+| Board Preparation | Any of `board-preparation` or `case-vignettes` | 23 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
 | Clinical Quick References | `clinical-knowledge` and any of `on-call`, `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | `on-call`, `quick-reference`, `guidelines`, and `clinical-decision-support-tools` tags |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
