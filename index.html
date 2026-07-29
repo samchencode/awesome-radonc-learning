@@ -2691,11 +2691,13 @@
           ].find((button) => button.dataset.value === value);
         }
 
-        function facetMatches(itemValues, selection) {
+        function facetMatches(itemValues, selection, requireAll = false) {
           const values = Array.isArray(itemValues) ? itemValues : [itemValues];
           const included =
             !selection.include.length ||
-            selection.include.some((value) => values.includes(value));
+            selection.include[requireAll ? "every" : "some"]((value) =>
+              values.includes(value),
+            );
           const excluded = selection.exclude.some((value) =>
             values.includes(value),
           );
@@ -2731,7 +2733,7 @@
               return (
                 facetMatches(element.dataset.mediaType, selected.media) &&
                 facetMatches(itemAudiences, selected.audience) &&
-                facetMatches(itemTags, selected.tag)
+                facetMatches(itemTags, selected.tag, true)
               );
             });
           }
