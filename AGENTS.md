@@ -170,7 +170,7 @@ Manual checks should cover the affected behavior and, when relevant:
 - Goal filters, exclusions, ordering, groups, Other buckets, Show Books
   control, and metadata tooltips.
 - Library search, priority sorting, include/exclude facets, tag-pill shortcuts,
-  pagination, and YAML preview upload.
+  and pagination.
 - Keyboard focus, narrow viewport layout, reduced motion, and external links.
 - Error states for malformed YAML or unavailable CDN dependencies.
 

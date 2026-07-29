@@ -58,8 +58,7 @@ small, localized edits.
 
 The browser loads:
 
-- js-yaml 4.1.1 from jsDelivr to parse both embedded YAML documents and
-  user-selected resource YAML.
+- js-yaml 4.1.1 from jsDelivr to parse both embedded YAML documents.
 - List.js 2.3.1 from jsDelivr for Library search, sorting, filtering state, and
   pagination.
 
@@ -195,12 +194,9 @@ tag. Activating one action clears the opposite action for the same value.
 - Exclusions reject a resource carrying any selected excluded value.
 - Clicking a tag pill on a resource activates that tag's include filter.
 
-Active filters render as removable chips. Loading a replacement resource YAML
-file resets search, filters, and sorting before rerendering both Library and
-Goal lists.
-
-The file picker previews only a resource array. It does not load replacement
-goal YAML and does not write to disk.
+Active filters render as removable chips. The runtime catalog always comes from
+`script#embeddedSources`; there is no file picker or replacement YAML preview
+flow.
 
 ## Goal Lists View
 
@@ -253,11 +249,8 @@ changes from a table-like grid to cards on mobile.
 - `safeUrl()` resolves URLs and permits only HTTP and HTTPS.
 - External links open in a new tab with `noopener noreferrer`.
 - CDN scripts are pinned and protected by SRI.
-- Uploaded YAML is parsed and rendered only in memory; it is not uploaded by
-  this application.
-
 This is a curated-content application, not a hardened arbitrary-YAML sandbox.
-Continue treating embedded and user-selected data as untrusted at render time.
+Continue treating embedded data as untrusted at render time.
 
 ## Change Impact
 
@@ -283,7 +276,6 @@ Before committing any change, follow the mandatory documentation audit in
 - Derived counts in documentation can drift when tags or filters change.
 - The single large HTML file increases merge-conflict risk.
 - Tag and audience grouping may intentionally duplicate resources.
-- Custom YAML loading replaces only resources and is not persisted.
 - Only `index.html` is deployed, so runtime cannot fetch repository notes.
 
 ## Validation Strategy

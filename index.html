@@ -1613,42 +1613,6 @@ goals:
         color: var(--ink);
       }
 
-      .load-file {
-        display: inline-flex;
-        min-height: 48px;
-        align-items: center;
-        justify-content: center;
-        padding: 0 18px;
-        border: 1px solid var(--line-strong);
-        border-radius: 11px;
-        background: var(--surface);
-        color: var(--ink);
-        cursor: pointer;
-        font-size: 0.84rem;
-        font-weight: 750;
-        white-space: nowrap;
-      }
-
-      .load-file:hover {
-        border-color: var(--teal);
-        color: var(--teal-dark);
-      }
-
-      .load-file:focus-within {
-        outline: 3px solid var(--focus);
-        outline-offset: 2px;
-      }
-
-      .load-file input {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        white-space: nowrap;
-      }
-
       .content-grid {
         display: grid;
         grid-template-columns: 270px minmax(0, 1fr);
@@ -2723,10 +2687,6 @@ goals:
           padding: 10px;
         }
 
-        .load-file {
-          min-height: 42px;
-        }
-
         .content-grid {
           grid-template-columns: 1fr;
         }
@@ -2929,10 +2889,6 @@ goals:
           </button>
         </div>
 
-        <label class="load-file">
-          Load a YAML file
-          <input id="yamlFileInput" type="file" accept=".yml,.yaml,text/yaml" />
-        </label>
       </div>
 
       <div id="loadingState" class="loading-state" role="status">
@@ -2943,8 +2899,7 @@ goals:
       <div id="errorState" class="error-state" role="alert" hidden>
         <h2>The resource file could not be loaded.</h2>
         <p>
-          Choose <strong>Load a YAML file</strong> above to replace the embedded
-          resource snapshot.
+          Check the embedded resource YAML near the top of this file.
         </p>
         <code id="errorDetail" class="error-detail"></code>
       </div>
@@ -3128,7 +3083,6 @@ goals:
           emptyState: document.querySelector("#emptyState"),
           errorDetail: document.querySelector("#errorDetail"),
           errorState: document.querySelector("#errorState"),
-          fileInput: document.querySelector("#yamlFileInput"),
           filters: document.querySelector(".filters"),
           goalErrorDetail: document.querySelector("#goalErrorDetail"),
           goalErrorState: document.querySelector("#goalErrorState"),
@@ -4127,9 +4081,6 @@ goals:
             throw new Error("Every resource must have a unique id.");
           }
 
-          const isReload = Boolean(resourceList);
-          if (isReload) resourceList.clear();
-
           elements.list.innerHTML = resources.map(renderCard).join("");
 
           const mediaCount = renderFacet(
@@ -4157,20 +4108,7 @@ goals:
           elements.contentGrid.hidden = false;
           elements.search.disabled = false;
 
-          if (isReload) {
-            elements.search.value = "";
-            elements.clearSearch.hidden = true;
-            elements.clearFilters.disabled = true;
-            elements.activeFilters.replaceChildren();
-            resourceList.reIndex();
-            resourceList.search();
-            resourceList.filter();
-            elements.sort.value = "priority-desc";
-            applySelectedSort();
-            updateResultMeta();
-          } else {
-            initializeList();
-          }
+          initializeList();
           renderGoalResults();
           attachInteractionHandlers();
         }
@@ -4207,7 +4145,7 @@ goals:
           if (resources.length) renderGoalResults();
         }
 
-        async function loadYamlText(text, filename = "sources.yml") {
+        function loadSourceYaml(text, filename = "sources.yml") {
           if (!window.jsyaml) {
             throw new Error(
               "The YAML parser could not be loaded from the CDN. Check your network connection.",
@@ -4240,29 +4178,11 @@ goals:
             if (!embeddedSource) {
               throw new Error("The embedded YAML snapshot is missing.");
             }
-            await loadYamlText(
-              embeddedSource.textContent,
-              "embedded sources.yml",
-            );
+            loadSourceYaml(embeddedSource.textContent, "embedded sources.yml");
           } catch (error) {
             showError(error);
           }
         }
-
-        elements.fileInput.addEventListener("change", async () => {
-          const [file] = elements.fileInput.files;
-          if (!file) return;
-
-          try {
-            elements.errorState.hidden = true;
-            elements.loadingState.hidden = false;
-            await loadYamlText(await file.text(), file.name);
-          } catch (error) {
-            showError(error);
-          } finally {
-            elements.fileInput.value = "";
-          }
-        });
 
         window.addEventListener("hashchange", showPageFromHash);
         showPageFromHash();

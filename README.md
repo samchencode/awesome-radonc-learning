@@ -52,8 +52,8 @@ The application loads minified js-yaml 4.1.1 and List.js 2.3.1 from versioned
 jsDelivr URLs. Subresource Integrity hashes ensure that the browser accepts only
 the exact files reviewed for this project.
 
-The **Load a YAML file** control can preview another YAML array at runtime. It
-does not modify `index.html` or save the uploaded data.
+At runtime, the application always uses the embedded resource and goal YAML in
+`index.html`. There is no separate catalog file or upload/preview flow.
 
 ## Resource schema
 
