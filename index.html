@@ -215,6 +215,18 @@
   url: "https://www.radoncquestions.com/"
   last_verified_at: "2026-07-28"
 
+- id: "arro-anki"
+  title: "ARRO Anki"
+  description: "A collection of peer-reviewed Anki flashcard decks created by ARRO for radiation oncology residents."
+  tags:
+    - "practice-based-learning"
+    - "clinical-knowledge"
+  audiences:
+    - "residents"
+  media_type: "applications"
+  url: "https://ankiweb.net/shared/by-author/472149962"
+  last_verified_at: "2026-07-28"
+
 - id: "radiation-oncology-a-question-based-review"
   priority: 63
   title: "Radiation Oncology: A Question-Based Review"
@@ -1148,6 +1160,73 @@
   last_verified_at: "2026-07-28"
 
 </script>
+    <script id="embeddedGoalFilters" type="text/yaml">
+# Every populated filter group must match.
+# all_tags requires every listed tag.
+# any_tags and any_audiences require at least one listed value.
+- id: "board-preparation"
+  title: "Board Preparation"
+  description: "Written boards, oral boards, certification, physics, and radiation biology."
+  filter:
+    any_tags:
+      - "board-preparation"
+      - "physics"
+      - "radiation-biology"
+
+- id: "contouring-and-treatment-planning"
+  title: "Contouring & Treatment Planning"
+  description: "Contouring practice, atlases, dose constraints, anatomy, planning guidance, and technical delivery."
+  filter:
+    any_tags:
+      - "contouring"
+      - "treatment-planning"
+      - "constraints"
+      - "anatomy"
+
+- id: "quick-clinical-lookup"
+  title: "Quick Clinical Lookup"
+  description: "Fast references for clinic, new patients, treatment recommendations, and tumor boards."
+  filter:
+    all_tags:
+      - "clinical-knowledge"
+    any_tags:
+      - "quick-reference"
+      - "guidelines"
+      - "clinical-decision-support-tools"
+
+- id: "active-learning"
+  title: "Active Learning / Retrieval Practice"
+  description: "Questions, mock cases, exercises, and clinical scenarios."
+  filter:
+    any_tags:
+      - "case-vignettes"
+      - "practice-based-learning"
+
+- id: "staying-current"
+  title: "Staying Current"
+  description: "Journal discussions, evidence summaries, journal clubs, and literature updates."
+  filter:
+    any_tags:
+      - "literature-review"
+
+- id: "incoming-learners"
+  title: "Incoming Learners"
+  description: "Orientation and foundational material for incoming residents and medical students."
+  filter:
+    all_tags:
+      - "introductory-education"
+    any_audiences:
+      - "residents"
+      - "medical-students"
+
+- id: "professional-development"
+  title: "Professional Development"
+  description: "Career development, mentorship, leadership, academic medicine, communication, and professional skills."
+  filter:
+    any_tags:
+      - "professional-development"
+
+</script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
@@ -1295,6 +1374,45 @@
         font-size: 0.77rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .page-nav {
+        display: inline-flex;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 9px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .page-nav a {
+        padding: 6px 10px;
+        border-radius: 6px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 0.75rem;
+        font-weight: 750;
+        text-decoration: none;
+      }
+
+      .page-nav a:hover {
+        color: #fff;
+      }
+
+      .page-nav a[aria-current="page"] {
+        background: #fff;
+        color: var(--navy);
+      }
+
+      .page-nav a:focus-visible {
+        outline: 3px solid var(--focus);
+        outline-offset: 2px;
       }
 
       .hero {
@@ -2008,6 +2126,91 @@
         font-size: 0.75rem;
       }
 
+      .goal-page-intro {
+        max-width: 760px;
+        margin-bottom: 38px;
+      }
+
+      .goal-page-intro h2 {
+        margin: 0 0 10px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        font-weight: 500;
+        letter-spacing: -0.035em;
+        line-height: 1;
+      }
+
+      .goal-page-intro p {
+        margin: 0;
+        color: var(--ink-soft);
+      }
+
+      .goal-results {
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .goal-result {
+        display: grid;
+        grid-template-columns: minmax(230px, 0.65fr) minmax(0, 1fr);
+        gap: clamp(28px, 5vw, 76px);
+        padding: 30px 0 36px;
+        border-bottom: 1px solid var(--line-strong);
+      }
+
+      .goal-result h3 {
+        margin: 0 0 7px;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.45rem;
+        line-height: 1.18;
+      }
+
+      .goal-description,
+      .goal-filter-summary {
+        margin: 0;
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+      }
+
+      .goal-filter-summary {
+        margin-top: 10px;
+        color: #6d797d;
+      }
+
+      .goal-count {
+        margin: 12px 0 0;
+        color: var(--teal-dark);
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .goal-resource-list {
+        margin: 0;
+        padding-left: 1.3rem;
+      }
+
+      .goal-resource-list li {
+        padding: 3px 0;
+      }
+
+      .goal-resource-list a {
+        color: var(--ink);
+        text-decoration-color: rgba(18, 99, 96, 0.3);
+        text-underline-offset: 3px;
+      }
+
+      .goal-resource-list a:hover {
+        color: var(--teal-dark);
+        text-decoration-color: currentColor;
+      }
+
+      .goal-resource-meta {
+        margin-left: 7px;
+        color: #748186;
+        font-size: 0.72rem;
+      }
+
       .site-footer {
         display: flex;
         width: min(calc(100% - 40px), var(--content-width));
@@ -2091,12 +2294,17 @@
 
         .brand-row {
           align-items: flex-start;
+          flex-wrap: wrap;
           margin-bottom: 46px;
+        }
+
+        .header-actions {
+          align-items: flex-start;
         }
 
         .source-note {
           max-width: 150px;
-          text-align: right;
+          text-align: left;
         }
 
         h1 {
@@ -2118,6 +2326,12 @@
 
         .content-grid {
           grid-template-columns: 1fr;
+        }
+
+        .goal-result {
+          grid-template-columns: 1fr;
+          gap: 18px;
+          padding: 26px 0 30px;
         }
 
         .filters {
@@ -2237,11 +2451,19 @@
     <header class="site-header">
       <div class="header-inner">
         <div class="brand-row">
-          <a class="brand" href="#" aria-label="ARRO Learning Resources home">
+          <a class="brand" href="#library" aria-label="ARRO Learning Resources home">
             <span class="brand-mark" aria-hidden="true"></span>
             ARRO Learning Resources
           </a>
-          <p class="source-note">Embedded YAML · Offline-ready</p>
+          <div class="header-actions">
+            <nav class="page-nav" aria-label="Resource views">
+              <a href="#library" data-page-link="library" aria-current="page"
+                >Library</a
+              >
+              <a href="#goals" data-page-link="goals">Goal lists</a>
+            </nav>
+            <p class="source-note">Embedded YAML · Offline-ready</p>
+          </div>
         </div>
 
         <div class="hero">
@@ -2419,6 +2641,28 @@
       </div>
     </main>
 
+    <main id="goal-browser" class="browser-shell" hidden>
+      <header class="goal-page-intro">
+        <h2>Resources by goal</h2>
+        <p>
+          Each list applies one of the goal filters defined in the embedded
+          goal-filter YAML.
+        </p>
+      </header>
+
+      <div id="goalLoadingState" class="loading-state" role="status">
+        <span class="loading-dot" aria-hidden="true"></span>
+        Loading goal lists…
+      </div>
+
+      <div id="goalErrorState" class="error-state" role="alert" hidden>
+        <h2>The goal lists could not be loaded.</h2>
+        <code id="goalErrorDetail" class="error-detail"></code>
+      </div>
+
+      <div id="goalResults" class="goal-results" hidden></div>
+    </main>
+
     <footer class="site-footer">
       <p>An offline snapshot of <strong>sources.yml</strong> is embedded in this page.</p>
       <p>Linked resource titles open in a new tab.</p>
@@ -2431,6 +2675,7 @@
         "use strict";
 
         const EMBEDDED_SOURCE_ID = "embeddedSources";
+        const EMBEDDED_GOAL_FILTER_ID = "embeddedGoalFilters";
         const FILTER_GROUPS = ["media", "audience", "tag"];
 
         if (window.matchMedia("(max-width: 720px)").matches) {
@@ -2451,7 +2696,13 @@
           errorState: document.querySelector("#errorState"),
           fileInput: document.querySelector("#yamlFileInput"),
           filters: document.querySelector(".filters"),
+          goalErrorDetail: document.querySelector("#goalErrorDetail"),
+          goalErrorState: document.querySelector("#goalErrorState"),
+          goalLoadingState: document.querySelector("#goalLoadingState"),
+          goalPage: document.querySelector("#goal-browser"),
+          goalResults: document.querySelector("#goalResults"),
           heroCount: document.querySelector("#heroCount"),
+          libraryPage: document.querySelector("#resource-browser"),
           list: document.querySelector(".list"),
           loadingState: document.querySelector("#loadingState"),
           matchingCount: document.querySelector("#matchingCount"),
@@ -2469,6 +2720,7 @@
 
         let resourceList = null;
         let resources = [];
+        let goalFilters = [];
         let handlersAttached = false;
 
         function labelFor(value) {
@@ -2560,6 +2812,157 @@
             url: resource.url ? String(resource.url) : null,
             last_verified_at: String(resource.last_verified_at),
           };
+        }
+
+        function normalizeGoalFilterValues(filter, key, index) {
+          const values = filter[key];
+          if (values == null) return [];
+          if (!Array.isArray(values)) {
+            throw new Error(
+              `Goal filter ${index + 1} must use an array for ${key}.`,
+            );
+          }
+          return [...new Set(values.map(String))];
+        }
+
+        function normalizeGoalFilter(goal, index) {
+          if (!goal || typeof goal !== "object") {
+            throw new Error(`Goal filter ${index + 1} is not an object.`);
+          }
+
+          const required = ["id", "title", "description", "filter"];
+          const missing = required.filter((key) => goal[key] == null);
+          if (missing.length) {
+            throw new Error(
+              `Goal filter ${index + 1} is missing: ${missing.join(", ")}.`,
+            );
+          }
+          if (!goal.filter || typeof goal.filter !== "object") {
+            throw new Error(`Goal filter ${index + 1} must define filter rules.`);
+          }
+
+          const filter = {
+            all_tags: normalizeGoalFilterValues(
+              goal.filter,
+              "all_tags",
+              index,
+            ),
+            any_tags: normalizeGoalFilterValues(
+              goal.filter,
+              "any_tags",
+              index,
+            ),
+            any_audiences: normalizeGoalFilterValues(
+              goal.filter,
+              "any_audiences",
+              index,
+            ),
+          };
+          if (!Object.values(filter).some((values) => values.length)) {
+            throw new Error(
+              `Goal filter ${index + 1} must contain at least one rule.`,
+            );
+          }
+
+          return {
+            id: String(goal.id),
+            title: String(goal.title),
+            description: String(goal.description),
+            filter,
+          };
+        }
+
+        function resourceMatchesGoal(resource, filter) {
+          return (
+            filter.all_tags.every((tag) => resource.tags.includes(tag)) &&
+            (!filter.any_tags.length ||
+              filter.any_tags.some((tag) => resource.tags.includes(tag))) &&
+            (!filter.any_audiences.length ||
+              filter.any_audiences.some((audience) =>
+                resource.audiences.includes(audience),
+              ))
+          );
+        }
+
+        function compareResourcesByPriority(left, right) {
+          const leftHasPriority = left.priority !== undefined;
+          const rightHasPriority = right.priority !== undefined;
+          if (leftHasPriority && rightHasPriority) {
+            return (
+              right.priority - left.priority ||
+              left.title.localeCompare(right.title)
+            );
+          }
+          if (leftHasPriority) return -1;
+          if (rightHasPriority) return 1;
+          return left.title.localeCompare(right.title);
+        }
+
+        function describeGoalFilter(filter) {
+          const rules = [
+            ["All topics", filter.all_tags],
+            ["Any topic", filter.any_tags],
+            ["Any audience", filter.any_audiences],
+          ];
+          return rules
+            .filter(([, values]) => values.length)
+            .map(
+              ([label, values]) =>
+                `${label}: ${values.map(labelFor).join(", ")}`,
+            )
+            .join(" · ");
+        }
+
+        function renderGoalResults() {
+          const sections = goalFilters.map((goal) => {
+            const matches = resources
+              .filter((resource) =>
+                resourceMatchesGoal(resource, goal.filter),
+              )
+              .sort(compareResourcesByPriority);
+            const resourceItems = matches
+              .map((resource) => {
+                const url = safeUrl(resource.url);
+                const title = escapeHtml(resource.title);
+                const linkedTitle = url
+                  ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+                  : `<span>${title}</span>`;
+                return `
+                  <li>
+                    ${linkedTitle}
+                    <span class="goal-resource-meta">${escapeHtml(labelFor(resource.media_type))}</span>
+                  </li>
+                `;
+              })
+              .join("");
+            const resultBody = resourceItems
+              ? `<ol class="goal-resource-list">${resourceItems}</ol>`
+              : '<p class="goal-description">No resources match this filter.</p>';
+            const countLabel = `${matches.length} ${
+              matches.length === 1 ? "resource" : "resources"
+            }`;
+
+            return `
+              <section
+                id="goal-${escapeHtml(goal.id)}"
+                class="goal-result"
+                aria-labelledby="goal-${escapeHtml(goal.id)}-title"
+              >
+                <header>
+                  <h3 id="goal-${escapeHtml(goal.id)}-title">${escapeHtml(goal.title)}</h3>
+                  <p class="goal-description">${escapeHtml(goal.description)}</p>
+                  <p class="goal-filter-summary">${escapeHtml(describeGoalFilter(goal.filter))}</p>
+                  <p class="goal-count">${escapeHtml(countLabel)}</p>
+                </header>
+                <div>${resultBody}</div>
+              </section>
+            `;
+          });
+
+          elements.goalResults.innerHTML = sections.join("");
+          elements.goalLoadingState.hidden = true;
+          elements.goalErrorState.hidden = true;
+          elements.goalResults.hidden = false;
         }
 
         function renderCard(resource) {
@@ -2941,12 +3344,34 @@
           });
         }
 
+        function showPageFromHash() {
+          const currentPage =
+            window.location.hash === "#goals" ? "goals" : "library";
+          elements.libraryPage.hidden = currentPage !== "library";
+          elements.goalPage.hidden = currentPage !== "goals";
+          document.querySelectorAll("[data-page-link]").forEach((link) => {
+            if (link.dataset.pageLink === currentPage) {
+              link.setAttribute("aria-current", "page");
+            } else {
+              link.removeAttribute("aria-current");
+            }
+          });
+          document.title =
+            currentPage === "goals"
+              ? "Goal Lists · ARRO Learning Resources"
+              : "ARRO Learning Resources";
+        }
+
         function showError(error) {
+          const message = error instanceof Error ? error.message : String(error);
           elements.loadingState.hidden = true;
           elements.contentGrid.hidden = true;
           elements.errorState.hidden = false;
-          elements.errorDetail.textContent =
-            error instanceof Error ? error.message : String(error);
+          elements.errorDetail.textContent = message;
+          elements.goalLoadingState.hidden = true;
+          elements.goalResults.hidden = true;
+          elements.goalErrorState.hidden = false;
+          elements.goalErrorDetail.textContent = message;
           elements.heroCount.textContent = "Resource library unavailable";
         }
 
@@ -3005,17 +3430,33 @@
           } else {
             initializeList();
           }
+          renderGoalResults();
           attachInteractionHandlers();
+        }
+
+        function loadGoalFilters(text, filename = "goal-filters.yml") {
+          if (!window.jsyaml) {
+            throw new Error("The embedded YAML parser is unavailable.");
+          }
+
+          const data = window.jsyaml.load(text, { filename });
+          if (!Array.isArray(data)) {
+            throw new Error("The goal-filter YAML root must be an array.");
+          }
+          goalFilters = data.map(normalizeGoalFilter);
+          const ids = new Set(goalFilters.map((goal) => goal.id));
+          if (ids.size !== goalFilters.length) {
+            throw new Error("Every goal filter must have a unique id.");
+          }
+          if (resources.length) renderGoalResults();
         }
 
         async function loadYamlText(text, filename = "sources.yml") {
           if (!window.jsyaml) {
-            throw new Error("The YAML parser could not be loaded from the CDN.");
+            throw new Error("The embedded YAML parser is unavailable.");
           }
           if (!window.List) {
-            throw new Error(
-              "The search and filter library could not be loaded from the CDN.",
-            );
+            throw new Error("The embedded search and filter library is unavailable.");
           }
 
           const data = window.jsyaml.load(text, { filename });
@@ -3024,6 +3465,17 @@
 
         async function loadDefaultSource() {
           try {
+            const embeddedGoalFilters = document.getElementById(
+              EMBEDDED_GOAL_FILTER_ID,
+            );
+            if (!embeddedGoalFilters) {
+              throw new Error("The embedded goal-filter YAML is missing.");
+            }
+            loadGoalFilters(
+              embeddedGoalFilters.textContent,
+              "embedded goal-filters.yml",
+            );
+
             const embeddedSource = document.getElementById(EMBEDDED_SOURCE_ID);
             if (!embeddedSource) {
               throw new Error("The embedded YAML snapshot is missing.");
@@ -3052,6 +3504,8 @@
           }
         });
 
+        window.addEventListener("hashchange", showPageFromHash);
+        showPageFromHash();
         loadDefaultSource();
       })();
     </script>
