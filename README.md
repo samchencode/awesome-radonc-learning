@@ -105,8 +105,8 @@ Current raw filter results are:
 | --- | --- | ---: | --- |
 | Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
 | Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | `contouring`, `anatomy`, `constraints`, and `proton-therapy` tags; unmatched resources appear under Other |
-| Board Preparation | `board-preparation` | 21 | `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
-| Quick Clinical Lookup | `clinical-knowledge` and any of `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | Media type |
+| Board Preparation | Any of `board-preparation` or `case-vignettes` | 24 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
+| Clinical Quick References | `clinical-knowledge` and any of `on-call`, `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | `on-call`, `quick-reference`, `guidelines`, and `clinical-decision-support-tools` tags |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
 | Professional Development | `professional-development` | 6 | Audience |
@@ -254,6 +254,7 @@ table, or technical planning demonstration should not receive
 | `contouring` | Teaches or supports target-volume or organ-at-risk delineation. |
 | `guidelines` | Formal clinical recommendations, consensus guidance, or appropriateness criteria. Do not use merely because a resource cites guidelines. |
 | `introductory-education` | Orientation or foundational material for learners new to radiation oncology or a defined part of the field. |
+| `on-call` | Practical material focused on urgent clinical questions, emergencies, handoffs, or call preparation. |
 | `physics` | Covers the physical principles, dosimetry, equipment, or technical foundations of radiation therapy. |
 | `practice-based-learning` | Uses questions, exercises, quizzes, mock cases, or other active practice rather than presentation alone. |
 | `professional-development` | Covers careers, mentorship, leadership, academic medicine, research careers, communication, finance, or professional skills. |
@@ -313,9 +314,11 @@ Use this sequence when adding or revising an entry:
 4. If applicable, choose at most one coverage-depth tag:
    `comprehensive-reference`, `core-reference`, or `high-yield-overview`.
 5. Add `quick-reference` when the resource is deliberately optimized for lookup.
-6. Add `literature-review` when discussing or synthesizing primary research is
+6. Add `on-call` when urgent clinical questions, emergencies, handoffs, or call
+   preparation are a substantial focus.
+7. Add `literature-review` when discussing or synthesizing primary research is
    a significant purpose.
-7. Add the remaining subject and learning-method tags conservatively.
+8. Add the remaining subject and learning-method tags conservatively.
 
 Tags should describe a substantial use of the resource, not every topic it
 mentions.

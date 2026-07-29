@@ -19,10 +19,11 @@ maintenance of certification.
 
 Suggested filter:
 
-- `board-preparation`
+- `board-preparation` OR `case-vignettes`
 
 Group matching resources by:
 
+- `case-vignettes`
 - `practice-based-learning`
 - `quick-reference`
 - `core-reference`
@@ -33,24 +34,26 @@ Physics and radiation-biology resources intended for board study carry the
 `board-preparation` tag explicitly. Broad textbooks no longer enter this goal
 merely because they cover physics or radiation biology.
 
-Current result: **21 of 79 resources**, including 6 books.
+Current result: **24 of 79 resources**, including 8 books.
 
-The goal page hides books and displays **15 unique resources**:
-`practice-based-learning` (2), `quick-reference` (1), `core-reference` (1),
-`physics` (4), `radiation-biology` (4), and `Other` (6). Group counts overlap
+The goal page hides books and displays **16 unique resources**:
+`case-vignettes` (4), `practice-based-learning` (1),
+`quick-reference` (1), `core-reference` (1), `physics` (4),
+`radiation-biology` (4), and `Other` (5). Group counts overlap
 because a resource appears in every group whose tag it carries.
 
-Tags represented: `board-preparation` (21), `clinical-knowledge` (13),
-`high-yield-overview` (8), `physics` (5), `practice-based-learning` (5),
-`radiation-biology` (5), `resource-list` (5), `treatment-planning` (4),
-`case-vignettes` (3), `ai-tools` (2), `anatomy` (2),
-`comprehensive-reference` (2), `contouring` (2),
-`professional-development` (2), `core-reference` (1), `guidelines` (1),
-`introductory-education` (1), `literature-review` (1), and
-`quick-reference` (1).
+Tags represented: `board-preparation` (21), `clinical-knowledge` (16),
+`high-yield-overview` (9), `case-vignettes` (6), `physics` (5),
+`practice-based-learning` (5), `radiation-biology` (5),
+`resource-list` (5), `treatment-planning` (5),
+`comprehensive-reference` (3), `contouring` (3), `anatomy` (2),
+`professional-development` (2), `ai-tools` (1), `core-reference` (1),
+`guidelines` (1), `introductory-education` (1), `literature-review` (1),
+and `quick-reference` (1).
 
-This accepted change narrows the former 26-resource result by reducing the
-number of books from 11 to 6 while retaining all 15 non-book resources.
+This accepted change includes case-vignette resources in the board-preparation
+shortcut while keeping the existing board-focused physics and radiation biology
+coverage.
 
 Statistics does not currently represent enough of the collection to warrant
 inclusion as a separate goal.
@@ -87,25 +90,41 @@ Tags represented: `treatment-planning` (26), `clinical-knowledge` (16),
 `radiation-biology` (4),
 `practice-based-learning` (3), `professional-development` (3),
 `proton-therapy` (3), `case-vignettes` (2), `introductory-education` (2),
-`ai-tools` (1), `literature-review` (1), and `resource-list` (1).
+`ai-tools` (1), `literature-review` (1), `on-call` (1), and
+`resource-list` (1).
 
-### Quick Clinical Lookup
+### Clinical Quick References
 
 For users preparing for clinic, reviewing a new patient, checking a treatment
-recommendation, or looking something up during a tumor board.
+recommendation, answering on-call questions, or looking something up during a
+tumor board.
 
 Suggested filter:
 
 - `clinical-knowledge`
-- AND at least one of `quick-reference`, `guidelines`, or `clinical-decision-support-tools`
+- AND at least one of `on-call`, `quick-reference`, `guidelines`, or
+  `clinical-decision-support-tools`
+
+Group matching resources by:
+
+- `on-call`
+- `quick-reference`
+- `guidelines`
+- `clinical-decision-support-tools`
 
 Current result: **14 of 79 resources**.
 
 Tags represented: `clinical-knowledge` (14), `quick-reference` (9),
 `core-reference` (6), `guidelines` (4), `treatment-planning` (3),
-`board-preparation` (2), `clinical-decision-support-tools` (2),
-`constraints` (2), `ai-tools` (1), `case-vignettes` (1),
-`comprehensive-reference` (1), `contouring` (1), and `resource-list` (1).
+`on-call` (3), `board-preparation` (2),
+`clinical-decision-support-tools` (2), `constraints` (2), `ai-tools` (1),
+`case-vignettes` (1), `comprehensive-reference` (1), `contouring` (1), and
+`resource-list` (1).
+
+With books hidden by default, the goal page initially displays
+`on-call` (1), `quick-reference` (4), `guidelines` (4), and
+`clinical-decision-support-tools` (2). Group counts overlap because resources
+carrying multiple grouping tags appear under each applicable heading.
 
 `clinical-knowledge` should not be used alone for this goal because it applies
 to a large portion of the collection.
@@ -119,17 +138,15 @@ Suggested filter:
 
 - `case-vignettes` OR `practice-based-learning`
 
-Current result: **13 of 79 resources**.
+Current result: **12 of 79 resources**.
 
-Tags represented: `clinical-knowledge` (13), `board-preparation` (8),
-`practice-based-learning` (8), `case-vignettes` (6),
-`high-yield-overview` (5), `treatment-planning` (4), `ai-tools` (2),
-`contouring` (2), `anatomy` (1), `comprehensive-reference` (1),
-`core-reference` (1), `introductory-education` (1),
-`professional-development` (1), `quick-reference` (1), and `resource-list`
-(1).
+Tags represented: `clinical-knowledge` (12), `board-preparation` (7),
+`practice-based-learning` (7), `case-vignettes` (6),
+`high-yield-overview` (4), `treatment-planning` (3), `ai-tools` (1),
+`comprehensive-reference` (1), `contouring` (1), `core-reference` (1), and
+`quick-reference` (1).
 
-This and Quick Clinical Lookup replace the less intuitive Case Preparation
+This and Clinical Quick References replace the less intuitive Case Preparation
 concept.
 
 
@@ -194,7 +211,8 @@ Suggested filter:
 
 - `clinical-knowledge`
 - AND at least one of `introductory-education`, `core-reference`,
-  `comprehensive-reference`, `high-yield-overview`, or `quick-reference`
+  `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or
+  `guidelines`
 
 Group matching resources by:
 
@@ -203,24 +221,24 @@ Group matching resources by:
 - `comprehensive-reference`
 - `high-yield-overview`
 - `quick-reference`
+- `guidelines`
 
-Current filter result: **37 of 79 resources**.
+Current filter result: **40 of 79 resources**.
 
-Tags represented: `clinical-knowledge` (37), `treatment-planning` (14),
+Tags represented: `clinical-knowledge` (40), `treatment-planning` (14),
 `high-yield-overview` (12), `core-reference` (11),
-`comprehensive-reference` (10), `board-preparation` (9),
-`quick-reference` (9), `practice-based-learning` (6),
+`board-preparation` (10), `comprehensive-reference` (10),
+`quick-reference` (9), `practice-based-learning` (5),
 `introductory-education` (5), `contouring` (4), `physics` (4),
 `professional-development` (4), `radiation-biology` (4),
-`case-vignettes` (3), `anatomy` (2), `constraints` (2),
-`literature-review` (2), `ai-tools` (1), `guidelines` (1), and
-`resource-list` (1).
+`guidelines` (4), `case-vignettes` (3), `on-call` (3), `anatomy` (2),
+`constraints` (2), `literature-review` (2), and `resource-list` (2).
 
 The current global goal-page option hides books. The page therefore displays
-**18 unique resources** for this goal: `introductory-education` (5),
+**21 unique resources** for this goal: `introductory-education` (5),
 `core-reference` (4), `comprehensive-reference` (3),
-`high-yield-overview` (7), and `quick-reference` (4). Group counts overlap
-because a resource appears in every group whose tag it carries.
+`high-yield-overview` (7), `quick-reference` (4), and `guidelines` (4). Group
+counts overlap because a resource appears in every group whose tag it carries.
 
 ### Professional Development
 
@@ -237,9 +255,8 @@ Current result: **6 of 79 resources**.
 Tags represented: `professional-development` (6), `clinical-knowledge` (4),
 `high-yield-overview` (3), `introductory-education` (3),
 `treatment-planning` (3), `anatomy` (2), `board-preparation` (2),
-`contouring` (2), `literature-review` (2), `resource-list` (2), `ai-tools`
-(1), `physics` (1), `practice-based-learning` (1), and
-`radiation-biology` (1).
+`contouring` (2), `literature-review` (2), `resource-list` (2), `physics`
+(1), and `radiation-biology` (1).
 
 `research-methods` should not be introduced because research methodology is not
 a significant portion of the current collection.
@@ -258,21 +275,13 @@ a significant portion of the current collection.
 - When grouping by tags, allow a multi-tagged resource to appear in each
   applicable group.
 
-## Ideas Not Yet Ready
-
-### On-Call
-
-On-Call remains a promising goal for emergencies, urgencies, and practical call
-preparation. The current metadata does not identify these resources reliably
-enough to build the shortcut yet. Do not add an `on-call` tag solely to support
-this idea.
-
 ## Current Decisions
 
 - Use goal categories as filter shortcuts rather than tags.
-- Replace Case Preparation with Quick Clinical Lookup and Practice With Cases.
+- Replace Case Preparation with Clinical Quick References and Practice With Cases.
 - Do not add `case-preparation`.
-- Do not add `on-call` yet.
+- Add `on-call` for resources materially focused on urgent clinical questions,
+  emergencies, handoffs, or call preparation.
 - Do not add `research-methods`.
 - Do not add or emphasize `statistics`.
 - Keep `literature-review` as the umbrella for evidence updates.
@@ -282,5 +291,6 @@ this idea.
 - Group Contouring & Treatment Planning by `contouring`, `anatomy`,
   `constraints`, and `proton-therapy`, with remaining matches under Other.
 - Add Build Clinical Framework using `clinical-knowledge` plus at least one
-  introductory, core, comprehensive, high-yield, or quick-reference tag.
-- Group Build Clinical Framework by those five learning-resource tags.
+  introductory, core, comprehensive, high-yield, quick-reference, or guidelines
+  tag.
+- Group Build Clinical Framework by those six learning-resource tags.

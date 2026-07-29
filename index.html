@@ -122,6 +122,7 @@
   tags:
     - "guidelines"
     - "quick-reference"
+    - "on-call"
     - "clinical-knowledge"
   audiences:
     - "residents"
@@ -889,6 +890,7 @@
   description: "A portable clinical reference summarizing disease-site management, treatment algorithms, planning, dose constraints, radiobiology, physics, and emergencies."
   tags:
     - "quick-reference"
+    - "on-call"
     - "core-reference"
     - "treatment-planning"
     - "constraints"
@@ -981,6 +983,7 @@
   description: "A compact disease-site reference covering cancer presentation, staging, clinical protocols, treatment approaches, palliation, and oncologic emergencies."
   tags:
     - "quick-reference"
+    - "on-call"
     - "core-reference"
     - "clinical-knowledge"
   audiences:
@@ -1217,9 +1220,11 @@ goals:
     filter:
       any_tags:
         - "board-preparation"
+        - "case-vignettes"
     group:
       by: "tags"
       tags:
+        - "case-vignettes"
         - "practice-based-learning"
         - "quick-reference"
         - "core-reference"
@@ -1227,17 +1232,23 @@ goals:
         - "radiation-biology"
 
   - id: "quick-clinical-lookup"
-    title: "Quick Clinical Lookup"
-    description: "Fast references for clinic, new patients, treatment recommendations, and tumor boards."
+    title: "Clinical Quick References"
+    description: "Fast references for on-call questions, clinic, new patients, treatment recommendations, and tumor boards."
     filter:
       all_tags:
         - "clinical-knowledge"
       any_tags:
+        - "on-call"
         - "quick-reference"
         - "guidelines"
         - "clinical-decision-support-tools"
     group:
-      by: "media_type"
+      by: "tags"
+      tags:
+        - "on-call"
+        - "quick-reference"
+        - "guidelines"
+        - "clinical-decision-support-tools"
 
   - id: "active-learning"
     title: "Active Learning / Retrieval Practice"
