@@ -99,9 +99,10 @@ updates both views and the hero status.
 - `media_type`
 - `last_verified_at`
 
-`priority` and `url` are optional. `tags` and `audiences` must be arrays.
-`priority`, when supplied, must convert to a finite number. After
-normalization, `renderResources()` rejects duplicate IDs.
+`priority`, `authors`, and `url` are optional. `tags`, `audiences`, and a
+provided `authors` value must be arrays. `priority`, when supplied, must convert
+to a finite number. The normalizer represents an omitted `authors` field as an
+empty array. After normalization, `renderResources()` rejects duplicate IDs.
 
 The runtime converts values to strings but does not enforce kebab-case,
 taxonomy membership, date shape, or URL reachability. Those are editorial
@@ -183,11 +184,13 @@ state. Reloading the page restores embedded data and default UI state.
 from the current dataset. It also creates a combined hidden search index from:
 
 - title
+- authors
 - description
 - media type
 - audiences
 - tags
 
+`renderCard()` displays nonempty authors as a byline beneath the resource title.
 List.js provides a 100 ms debounced search, priority/title/media sorting, and
 12-item pagination.
 
@@ -221,9 +224,9 @@ may also report raw filter counts, so those two numbers must be labeled
 clearly. Books currently match filters normally but are hidden by default and
 can be restored with Show Books.
 
-Goal resource tooltips expose description, tags, audiences, and media type on
-hover or keyboard focus. Tooltip IDs are regenerated for every render to keep
-`aria-describedby` relationships unique.
+Goal resource tooltips expose description, optional authors, tags, audiences,
+and media type on hover or keyboard focus. Tooltip IDs are regenerated for
+every render to keep `aria-describedby` relationships unique.
 
 The Goal lists page also renders a fixed table of contents from the active goal
 definitions. It links to each goal section with `#goal-{id}` anchors, stays

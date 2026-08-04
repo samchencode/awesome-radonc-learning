@@ -44,6 +44,8 @@ other resource records.
 
 - Keep `id` stable, unique, and lowercase kebab-case.
 - Treat `priority` as optional editorial ordering; higher values sort first.
+- Store `authors` as an optional array of source-credited author or editor
+  names; omit it when the source provides no credit.
 - Keep descriptions short, specific, and about scope or use.
 - Use controlled tag, audience, and media-type values from `README.md`.
 - Use no more than one reference-depth tag:

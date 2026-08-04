@@ -5,7 +5,7 @@ into the existing filters rather than becoming tags themselves. Accepted
 changes are identified in their respective sections.
 
 Coverage figures below are a snapshot of the 79 resources embedded in
-`index.html` on 2026-07-29. The number beside each represented tag is the number
+`index.html` on 2026-08-03. The number beside each represented tag is the number
 of matching resources carrying that tag. Tag counts overlap because each
 resource can carry multiple tags, and a resource can appear under multiple
 goals.
@@ -37,7 +37,7 @@ Physics and radiation-biology resources intended for board study carry the
 `board-preparation` tag explicitly. Broad textbooks no longer enter this goal
 merely because they cover physics or radiation biology.
 
-Current result: **23 of 79 resources**, including 8 books.
+Current result: **22 of 79 resources**, including 7 books.
 
 The goal page hides books and displays **15 unique resources**:
 `case-vignettes` (4), `practice-based-learning` (1),
@@ -45,11 +45,11 @@ The goal page hides books and displays **15 unique resources**:
 Group counts overlap because a resource appears in every group whose tag it
 carries.
 
-Tags represented: `board-preparation` (20), `clinical-knowledge` (15),
-`high-yield-overview` (8), `case-vignettes` (6), `physics` (5),
+Tags represented: `board-preparation` (20), `clinical-knowledge` (14),
+`high-yield-overview` (8), `case-vignettes` (5), `physics` (5),
 `practice-based-learning` (5), `radiation-biology` (5),
-`resource-list` (5), `treatment-planning` (5),
-`comprehensive-reference` (3), `contouring` (3), `anatomy` (2),
+`resource-list` (5), `treatment-planning` (4), `contouring` (3),
+`comprehensive-reference` (2), `anatomy` (2),
 `professional-development` (2), `ai-tools` (1), `core-reference` (1),
 `guidelines` (1), `introductory-education` (1), `literature-review` (1),
 and `quick-reference` (1).
@@ -140,13 +140,12 @@ Suggested filter:
 
 - `case-vignettes` OR `practice-based-learning`
 
-Current result: **12 of 79 resources**.
+Current result: **10 of 79 resources**.
 
-Tags represented: `clinical-knowledge` (12), `board-preparation` (7),
-`practice-based-learning` (7), `case-vignettes` (6),
-`high-yield-overview` (4), `treatment-planning` (3), `ai-tools` (1),
-`comprehensive-reference` (1), `contouring` (1), `core-reference` (1), and
-`quick-reference` (1).
+Tags represented: `clinical-knowledge` (10), `board-preparation` (7),
+`practice-based-learning` (6), `case-vignettes` (5),
+`high-yield-overview` (4), `treatment-planning` (2), `ai-tools` (1),
+`contouring` (1), and `quick-reference` (1).
 
 This and Clinical Quick References replace the less intuitive Case Preparation
 concept.

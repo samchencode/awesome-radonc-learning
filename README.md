@@ -63,6 +63,8 @@ The YAML root must be an array of resource objects.
 - id: "example-resource"
   priority: 10
   title: "Example Resource"
+  authors:
+    - "Example Author"
   description: "A one-sentence explanation of the resource's scope and use."
   tags:
     - "core-reference"
@@ -83,6 +85,7 @@ The YAML root must be an array of resource objects.
 | `id` | Yes | Stable, unique, lowercase kebab-case identifier. Do not change it merely because a title changes. |
 | `priority` | No | Numeric editorial ranking. Higher values sort first by default. Resources without a priority sort below prioritized resources. |
 | `title` | Yes | Human-readable resource name. Include an edition when it materially identifies a book or other publication. |
+| `authors` | No | Array of credited author or editor names. Preserve human-readable names as given by the source; omit the field when no credit is available. |
 | `description` | Yes | Short, specific sentence describing scope and intended use rather than repeating the title or author list. |
 | `tags` | Yes | Array describing subject matter, depth, evidence orientation, and use. Use the controlled vocabulary below. |
 | `audiences` | Yes | Array identifying the groups for whom the resource is materially useful. |
@@ -105,9 +108,9 @@ Current raw filter results are:
 | --- | --- | ---: | --- |
 | Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | Labeled groups for `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` |
 | Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | `contouring`, `anatomy`, `constraints`, and `proton-therapy` tags; unmatched resources appear under Other |
-| Board Preparation | Any of `board-preparation` or `case-vignettes` | 23 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `physics`, and `radiation-biology` groups |
+| Board Preparation | Any of `board-preparation` or `case-vignettes` | 22 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `physics`, and `radiation-biology` groups |
 | Clinical Quick References | `clinical-knowledge` and any of `on-call`, `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | `quick-reference`, `guidelines`, and `clinical-decision-support-tools` groups |
-| Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
+| Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 10 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
 | Professional Development | `professional-development` | 6 | Audience |
 
@@ -116,9 +119,9 @@ goals capture 78 of 79 resources; ROECSG Podcast Search Engine remains
 available through normal library browsing.
 
 Hovering a resource title in a goal list—or focusing it with the keyboard—shows
-its description, tags, audiences, and media type. This tooltip is intentionally
-limited to the Goal lists page; the Library table continues to display metadata
-directly in its columns.
+its description, authors when present, tags, audiences, and media type. This
+tooltip is intentionally limited to the Goal lists page; the Library table
+continues to display metadata directly in its columns.
 
 Books are currently hidden by default from all goal lists through
 `options.hide_media_types`. Users can reveal them with the **Show Books**
@@ -341,9 +344,10 @@ mentions.
 3. Keep the YAML root as an array and preserve two-space indentation.
 4. Use a unique stable `id`, controlled taxonomy values, and a one-sentence
    description.
-5. Use a valid URL or `null`.
-6. Update `last_verified_at` when the destination and metadata are checked.
-7. Open `index.html` in a browser and confirm that the library loads, filters
+5. Add `authors` as an array when the source provides author or editor credits.
+6. Use a valid URL or `null`.
+7. Update `last_verified_at` when the destination and metadata are checked.
+8. Open `index.html` in a browser and confirm that the library loads, filters
    appear, search works, and no YAML error is shown.
 
 Do not edit the CDN dependency tags when changing resource data.
