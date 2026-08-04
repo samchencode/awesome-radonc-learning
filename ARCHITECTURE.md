@@ -140,17 +140,25 @@ Grouping is optional:
 ```yaml
 group:
   by: "tags"
-  tags:
-    - "quick-reference"
+  groups:
+    - label: "Clinical Lookup"
+      any_tags:
+        - "quick-reference"
+        - "guidelines"
 ```
 
 `group.by` accepts `tags`, `media_type`, or `audience`. Unknown group fields are
-rejected. `group.tags` is required when grouping by tags.
+rejected. Tag grouping normally uses `group.groups`; every entry requires only
+the supported fields `label` and `any_tags`, and `any_tags` must contain at
+least one value. The normalizer assigns an internal ID based on group order.
+The older `group.tags` array remains supported as a compatibility shorthand,
+but `tags` and `groups` cannot be populated together.
 
-Tag grouping is intentionally nonexclusive. A resource appears in each
-configured tag group it matches. A matching resource with none of those tags
-appears in Other. Media-type groups are exclusive. Audience groups may repeat a
-resource because audiences are arrays.
+`groupGoalResources()` treats each labeled group's `any_tags` as logical OR.
+Tag grouping is intentionally nonexclusive: a resource appears in each group
+it matches. A matching resource that matches no configured group appears in
+Other. Media-type groups are exclusive. Audience groups may repeat a resource
+because audiences are arrays.
 
 ## Runtime State
 

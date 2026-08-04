@@ -10,6 +10,10 @@ of matching resources carrying that tag. Tag counts overlap because each
 resource can carry multiple tags, and a resource can appear under multiple
 goals.
 
+Active tag-group definitions use labeled `group.groups` entries. Each grouping
+tag listed below currently occupies its own entry with a one-value `any_tags`
+array; none of the active groups combine multiple tags yet.
+
 ## Proposed Goals
 
 ### Board Preparation
@@ -26,7 +30,6 @@ Group matching resources by:
 - `case-vignettes`
 - `practice-based-learning`
 - `quick-reference`
-- `core-reference`
 - `physics`
 - `radiation-biology`
 
@@ -38,9 +41,9 @@ Current result: **23 of 79 resources**, including 8 books.
 
 The goal page hides books and displays **15 unique resources**:
 `case-vignettes` (4), `practice-based-learning` (1),
-`quick-reference` (1), `core-reference` (1), `physics` (4),
-`radiation-biology` (4), and `Other` (4). Group counts overlap
-because a resource appears in every group whose tag it carries.
+`quick-reference` (1), `physics` (4), `radiation-biology` (4), and `Other` (4).
+Group counts overlap because a resource appears in every group whose tag it
+carries.
 
 Tags represented: `board-preparation` (20), `clinical-knowledge` (15),
 `high-yield-overview` (8), `case-vignettes` (6), `physics` (5),
@@ -107,7 +110,6 @@ Suggested filter:
 
 Group matching resources by:
 
-- `on-call`
 - `quick-reference`
 - `guidelines`
 - `clinical-decision-support-tools`
@@ -122,9 +124,9 @@ Tags represented: `clinical-knowledge` (14), `quick-reference` (9),
 `resource-list` (1).
 
 With books hidden by default, the goal page initially displays
-`on-call` (1), `quick-reference` (4), `guidelines` (4), and
-`clinical-decision-support-tools` (2). Group counts overlap because resources
-carrying multiple grouping tags appear under each applicable heading.
+`quick-reference` (4), `guidelines` (4), and `clinical-decision-support-tools`
+(2). Group counts overlap because resources carrying multiple grouping tags
+appear under each applicable heading.
 
 `clinical-knowledge` should not be used alone for this goal because it applies
 to a large portion of the collection.
@@ -236,7 +238,7 @@ Tags represented: `clinical-knowledge` (40), `treatment-planning` (14),
 
 The current global goal-page option hides books. The page therefore displays
 **21 unique resources** for this goal: `introductory-education` (5),
-`core-reference` (4), `comprehensive-reference` (3),
+`core-reference` (3), `comprehensive-reference` (3),
 `high-yield-overview` (7), `quick-reference` (4), and `guidelines` (4). Group
 counts overlap because a resource appears in every group whose tag it carries.
 

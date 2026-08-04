@@ -103,10 +103,10 @@ Current raw filter results are:
 
 | Goal | Match logic | Raw matches | Grouping |
 | --- | --- | ---: | --- |
-| Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` tags |
+| Build Clinical Framework | `clinical-knowledge` and any of `introductory-education`, `core-reference`, `comprehensive-reference`, `high-yield-overview`, `quick-reference`, or `guidelines` | 40 | Labeled groups for `introductory-education`, `quick-reference`, `high-yield-overview`, `core-reference`, `comprehensive-reference`, and `guidelines` |
 | Contouring & Treatment Planning | Any of `contouring`, `treatment-planning`, `constraints`, or `anatomy` | 30 | `contouring`, `anatomy`, `constraints`, and `proton-therapy` tags; unmatched resources appear under Other |
-| Board Preparation | Any of `board-preparation` or `case-vignettes` | 23 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `core-reference`, `physics`, and `radiation-biology` tags |
-| Clinical Quick References | `clinical-knowledge` and any of `on-call`, `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | `on-call`, `quick-reference`, `guidelines`, and `clinical-decision-support-tools` tags |
+| Board Preparation | Any of `board-preparation` or `case-vignettes` | 23 | `case-vignettes`, `practice-based-learning`, `quick-reference`, `physics`, and `radiation-biology` groups |
+| Clinical Quick References | `clinical-knowledge` and any of `on-call`, `quick-reference`, `guidelines`, or `clinical-decision-support-tools` | 14 | `quick-reference`, `guidelines`, and `clinical-decision-support-tools` groups |
 | Active Learning / Retrieval Practice | Any of `case-vignettes` or `practice-based-learning` | 12 | Media type |
 | Staying Current | Any of `literature-review` or `newsletters`, excluding `core-reference` and `resource-list` | 8 | Media type |
 | Professional Development | `professional-development` | 6 | Audience |
@@ -149,9 +149,14 @@ goals:
         - "residents"
     group:
       by: "tags"
-      tags:
-        - "core-reference"
-        - "quick-reference"
+      groups:
+        - label: "Clinical Lookup"
+          any_tags:
+            - "quick-reference"
+            - "guidelines"
+        - label: "Core Reference"
+          any_tags:
+            - "core-reference"
 ```
 
 Every populated filter group must match:
@@ -167,13 +172,18 @@ Every goal requires a unique `id`, `title`, `description`, and nonempty
 `group` is optional and changes presentation rather than matching:
 
 - `by` accepts `media_type`, `audience`, or `tags`.
-- Grouping by `tags` also requires a `tags` array.
-- A resource carrying multiple configured group tags appears under every
-  applicable tag heading.
-- A matching resource without a configured group tag appears under Other.
+- The preferred tag-grouping form uses a `groups` array. Each item requires a
+  display `label` and a nonempty `any_tags` array.
+- A resource matches a labeled group when it carries at least one of that
+  group's `any_tags` values.
+- Tag groups are nonexclusive. A resource matching multiple configured groups
+  appears under every applicable heading.
+- A matching resource that matches no configured group appears under Other.
+- The older `group.tags` array remains supported as a compatibility shorthand
+  for one automatically labeled group per tag. Do not use `tags` and `groups`
+  together in the same `group` object.
 
-The supported syntax is `group.by: "tags"` plus `group.tags`; `by_tags` is not
-a recognized field.
+`by_tags` is not a recognized field.
 
 ## Taxonomy principles
 
@@ -345,7 +355,8 @@ Do not edit the CDN dependency tags when changing resource data.
 3. Preserve the top-level `options` object and `goals` array.
 4. Use only supported filter rules: `all_tags`, `any_tags`, `none_tags`, and
    `any_audiences`.
-5. When grouping, use `group.by` and add `group.tags` when `by` is `tags`.
+5. When grouping by tags, use `group.by: "tags"` and add labeled
+   `group.groups` entries with nonempty `any_tags` arrays.
 6. Keep goal IDs unique and use only taxonomy values present in the resource
    catalog.
 7. Open `index.html#goals` and confirm that every goal renders, counts are

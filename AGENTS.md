@@ -79,13 +79,18 @@ grouping uses:
 ```yaml
 group:
   by: "tags"
-  tags:
-    - "example-tag"
+  groups:
+    - label: "Example Group"
+      any_tags:
+        - "example-tag"
 ```
 
-`by_tags` is invalid. Tag grouping is nonexclusive: a resource appears in
-every configured tag group it matches. A match carrying none of the configured
-group tags appears under Other.
+Every tag group requires a nonempty `label` and `any_tags` array. Values within
+`any_tags` use OR logic. The older `group.tags` shorthand remains supported,
+but new and revised definitions should use `group.groups`, and a group object
+must not populate both forms. `by_tags` is invalid. Tag grouping is
+nonexclusive: a resource appears in every configured tag group it matches. A
+match carrying none of the configured group tags appears under Other.
 
 Goal names are navigation shortcuts, not resource tags. Do not create a new
 resource tag solely to make a goal easier to express without first documenting

@@ -1169,6 +1169,7 @@
 # none_tags rejects resources carrying any listed tag.
 # hide_media_types applies to every goal list without affecting the library page.
 # group is optional; omit it to show one complete result list.
+# Tag groups have a display label and match any listed tag.
 options:
   hide_media_types:
     - "books"
@@ -1189,13 +1190,25 @@ goals:
         - "guidelines"
     group:
       by: "tags"
-      tags:
-        - "introductory-education"
-        - "quick-reference"
-        - "high-yield-overview"
-        - "core-reference"
-        - "comprehensive-reference"
-        - "guidelines"
+      groups:
+        - label: "Introductory Education"
+          any_tags:
+            - "introductory-education"
+        - label: "Quick Reference"
+          any_tags:
+            - "quick-reference"
+        - label: "High Yield Overview"
+          any_tags:
+            - "high-yield-overview"
+        - label: "Core Reference"
+          any_tags:
+            - "core-reference"
+        - label: "Comprehensive Reference"
+          any_tags:
+            - "comprehensive-reference"
+        - label: "Guidelines"
+          any_tags:
+            - "guidelines"
 
   - id: "contouring-and-treatment-planning"
     title: "Contouring & Treatment Planning"
@@ -1208,11 +1221,19 @@ goals:
         - "anatomy"
     group:
       by: "tags"
-      tags:
-        - "contouring"
-        - "anatomy"
-        - "constraints"
-        - "proton-therapy"
+      groups:
+        - label: "Contouring"
+          any_tags:
+            - "contouring"
+        - label: "Anatomy"
+          any_tags:
+            - "anatomy"
+        - label: "Constraints"
+          any_tags:
+            - "constraints"
+        - label: "Proton Therapy"
+          any_tags:
+            - "proton-therapy"
 
   - id: "board-preparation"
     title: "Board Preparation"
@@ -1223,12 +1244,22 @@ goals:
         - "case-vignettes"
     group:
       by: "tags"
-      tags:
-        - "case-vignettes"
-        - "practice-based-learning"
-        - "quick-reference"
-        - "physics"
-        - "radiation-biology"
+      groups:
+        - label: "Case Vignettes"
+          any_tags:
+            - "case-vignettes"
+        - label: "Practice Based Learning"
+          any_tags:
+            - "practice-based-learning"
+        - label: "Quick Reference"
+          any_tags:
+            - "quick-reference"
+        - label: "Physics"
+          any_tags:
+            - "physics"
+        - label: "Radiation Biology"
+          any_tags:
+            - "radiation-biology"
 
   - id: "quick-clinical-lookup"
     title: "Clinical Quick References"
@@ -1243,10 +1274,16 @@ goals:
         - "clinical-decision-support-tools"
     group:
       by: "tags"
-      tags:
-        - "quick-reference"
-        - "guidelines"
-        - "clinical-decision-support-tools"
+      groups:
+        - label: "Quick Reference"
+          any_tags:
+            - "quick-reference"
+        - label: "Guidelines"
+          any_tags:
+            - "guidelines"
+        - label: "Clinical Decision Support Tools"
+          any_tags:
+            - "clinical-decision-support-tools"
 
   - id: "active-learning"
     title: "Active Learning / Retrieval Practice"
@@ -2386,16 +2423,10 @@ goals:
         line-height: 1.18;
       }
 
-      .goal-description,
-      .goal-filter-summary {
+      .goal-description {
         margin: 0;
         color: var(--ink-soft);
         font-size: 0.82rem;
-      }
-
-      .goal-filter-summary {
-        margin-top: 10px;
-        color: #6d797d;
       }
 
       .goal-count {
@@ -3214,6 +3245,43 @@ goals:
           return [...new Set(values.map(String))];
         }
 
+        function normalizeGoalTagGroups(groups, description) {
+          if (groups == null) return [];
+          if (!Array.isArray(groups)) {
+            throw new Error(`${description} must be an array.`);
+          }
+          return groups.map((group, index) => {
+            const groupDescription = `${description} item ${index + 1}`;
+            if (!group || typeof group !== "object" || Array.isArray(group)) {
+              throw new Error(`${groupDescription} must be an object.`);
+            }
+            const unknown = Object.keys(group).filter(
+              (key) => !["label", "any_tags"].includes(key),
+            );
+            if (unknown.length) {
+              throw new Error(
+                `${groupDescription} has unsupported fields: ${unknown.join(", ")}.`,
+              );
+            }
+            const label = String(group.label || "").trim();
+            if (!label) {
+              throw new Error(`${groupDescription} must have a label.`);
+            }
+            const anyTags = normalizeStringArray(
+              group.any_tags,
+              `${groupDescription} any_tags`,
+            );
+            if (!anyTags.length) {
+              throw new Error(`${groupDescription} must list any_tags.`);
+            }
+            return {
+              id: `tag-group-${index + 1}`,
+              label,
+              any_tags: anyTags,
+            };
+          });
+        }
+
         function normalizeGoalOptions(options) {
           if (options == null) return { hide_media_types: [] };
           if (typeof options !== "object" || Array.isArray(options)) {
@@ -3302,7 +3370,7 @@ goals:
               );
             }
             const unknownGroupRules = Object.keys(goal.group).filter(
-              (key) => !["by", "tags"].includes(key),
+              (key) => !["by", "tags", "groups"].includes(key),
             );
             if (unknownGroupRules.length) {
               throw new Error(
@@ -3313,14 +3381,24 @@ goals:
               goal.group.tags,
               `Goal filter ${index + 1} group.tags`,
             );
-            if (groupBy === "tags" && !groupTags.length) {
+            const tagGroups = normalizeGoalTagGroups(
+              goal.group.groups,
+              `Goal filter ${index + 1} group.groups`,
+            );
+            if (groupBy === "tags" && groupTags.length && tagGroups.length) {
               throw new Error(
-                `Goal filter ${index + 1} must list tags when grouping by tags.`,
+                `Goal filter ${index + 1} must use either group.tags or group.groups, not both.`,
+              );
+            }
+            if (groupBy === "tags" && !groupTags.length && !tagGroups.length) {
+              throw new Error(
+                `Goal filter ${index + 1} must define tags or groups when grouping by tags.`,
               );
             }
             group = {
               by: groupBy,
               tags: groupTags,
+              groups: tagGroups,
             };
           }
 
@@ -3360,34 +3438,29 @@ goals:
           return left.title.localeCompare(right.title);
         }
 
-        function describeGoalFilter(filter) {
-          const rules = [
-            ["All topics", filter.all_tags],
-            ["Any topic", filter.any_tags],
-            ["Exclude topics", filter.none_tags],
-            ["Any audience", filter.any_audiences],
-          ];
-          return rules
-            .filter(([, values]) => values.length)
-            .map(
-              ([label, values]) =>
-                `${label}: ${values.map(labelFor).join(", ")}`,
-            )
-            .join(" · ");
-        }
-
         function groupGoalResources(matches, group) {
           if (group.by === "tags") {
-            const groups = group.tags.map((tag) => ({
-              id: tag,
-              label: labelFor(tag),
+            const tagGroups = group.groups.length
+              ? group.groups
+              : group.tags.map((tag) => ({
+                  id: tag,
+                  label: labelFor(tag),
+                  any_tags: [tag],
+                }));
+            const resourceMatchesGroup = (resource, tagGroup) =>
+              tagGroup.any_tags.some((tag) => resource.tags.includes(tag));
+            const groups = tagGroups.map((tagGroup) => ({
+              id: tagGroup.id,
+              label: tagGroup.label,
               resources: matches.filter((resource) =>
-                resource.tags.includes(tag),
+                resourceMatchesGroup(resource, tagGroup),
               ),
             }));
             const otherResources = matches.filter(
               (resource) =>
-                !group.tags.some((tag) => resource.tags.includes(tag)),
+                !tagGroups.some((tagGroup) =>
+                  resourceMatchesGroup(resource, tagGroup),
+                ),
             );
             if (otherResources.length) {
               groups.push({
@@ -3603,7 +3676,6 @@ goals:
                 <header>
                   <h3 id="goal-${escapeHtml(goal.id)}-title">${escapeHtml(goal.title)}</h3>
                   <p class="goal-description">${escapeHtml(goal.description)}</p>
-                  <p class="goal-filter-summary">${escapeHtml(describeGoalFilter(goal.filter))}</p>
                   <p class="goal-count">${escapeHtml(countLabel)}</p>
                 </header>
                 <div class="goal-masonry">${resultBody}</div>
